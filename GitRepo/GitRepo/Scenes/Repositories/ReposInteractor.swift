@@ -13,6 +13,8 @@ protocol ReposInteractorBusinessLogic {
 }
 
 class ReposInteractor: ReposInteractorBusinessLogic {
+    var repository: Repository?
+    var data: GithubData?
     var worker: GithubWorker = GithubWorker()
     var viewController: ReposViewController?
     var presenter: ReposPresenter?
@@ -37,5 +39,12 @@ extension ReposInteractor {
                 print("Server error timeOut: \(description) \n")
             }
         }
+    }
+}
+
+extension ReposInteractor: RepositoriesCollectionViewInteractorLogic {
+    func itemsCount() -> Int {
+        let items = data?.items
+        return items?.count ?? 0
     }
 }

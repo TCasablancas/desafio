@@ -13,13 +13,21 @@ protocol RepositoriesCollectionViewPresentationLogic: class {
     func reload()
 }
 
+protocol RepositoriesCollectionViewInteractorLogic {
+    func itemsCount() -> Int
+}
+
 class RepositoriesCollectionView: UIView {
     weak var interactor: ReposInteractor?
+    var viewController: ReposViewController?
     var viewCell: RepositoriesCollectionViewCell?
+    var repository: Repository?
+    var selectedRepository: Repository? = nil
     private let cellIdentifier = "cell"
     
     init() {
         super.init(frame: .zero)
+        setup()
     }
     
     required init?(coder: NSCoder) {
@@ -36,7 +44,8 @@ class RepositoriesCollectionView: UIView {
         cell.delegate = self
         cell.dataSource = self
         cell.clipsToBounds = true
-        cell.backgroundColor = .clear
+        cell.backgroundColor = Theme.default.white
+        cell.layer.cornerRadius = 10
         return cell
     }()
     
@@ -50,11 +59,47 @@ class RepositoriesCollectionView: UIView {
     }()
 }
 
+//MARK: - CollectionViewDelegate Setup
+
+extension RepositoriesCollectionView: UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout {
+    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+        return interactor?.itemsCount() ?? 0
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
+        guard
+            let cell = self.collectionView.dequeueReusableCell(withReuseIdentifier: cellIdentifier, for: indexPath) as? RepositoriesCollectionViewCell,
+            let interact = interactor,
+            let repository = interact.repository else { return UICollectionViewCell() }
+        
+        cell.delegate = self
+        cell.configureWith(repository)
+        
+        return cell
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
+        return CGSize(width: collectionView.bounds.width, height: collectionView.bounds.height)
+    }
+    
+//    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+//        self.selectedRepository = self.repository?[indexPath[0].row]
+//    }
+}
+
+//MARK: -
+
 extension RepositoriesCollectionView: RepositoriesCollectionViewCellDelegate {
+    func routeToRepository() {
+        //
+    }
+    
     func reload() {
 //        viewCell.reloadData()
     }
 }
+
+//MARK: - Setup UI
 
 extension RepositoriesCollectionView: ViewCode {
     func viewHierarchy() {
@@ -63,8 +108,11 @@ extension RepositoriesCollectionView: ViewCode {
     
     func setupConstraints() {
         collectionView.snp.makeConstraints { make in
-            make.width.equalToSuperview()
-            make.height.equalToSuperview()
+            make.left.equalToSuperview().offset(20)
+            make.right.equalToSuperview().offset(-20)
+            make.top.equalToSuperview().offset(120)
+            make.bottom.equalToSuperview().offset(-40)
+            make.centerX.equalToSuperview()
         }
     }
     

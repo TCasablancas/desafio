@@ -13,26 +13,24 @@ class ReposViewController: UIViewController {
     var presenter: ReposPresenter?
     var interactor: ReposInteractor?
     var worker: GithubWorker?
+    var repository: Repository?
     var currentPage = 0
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        setupConfig()
+        
         
         self.interactor?.getData()
-
+        let nib = UINib(nibName: "RepositoriesCollectionViewCell", bundle: nil)
+        self.collectionView.collectionView.register(nib, forCellWithReuseIdentifier: "cell")
+    
     }
     
-//    override init(nibName nibNameOrNil: String?, bundle nibBundleOrNil: Bundle?) {
-//        super.init(nibName: nibNameOrNil, bundle: nibBundleOrNil)
-//        setupConfig()
-//        setup()
-//    }
-    
-    required init?(coder aDecoder: NSCoder) {
-        super.init(coder: aDecoder)
-        setupConfig()
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
         setup()
-    }
+    }   
     
     private func setupConfig() {
         let viewController = self
@@ -45,6 +43,11 @@ class ReposViewController: UIViewController {
         interactor.viewController = viewController
         interactor.presenter = presenter
         interactor.worker = worker
+        collectionView.viewController = viewController
+        collectionView.interactor = interactor
+        collectionView.viewCell = collectionViewCell
+        collectionView.repository = repository
+        viewController.collectionView = collectionView
     }
     
     //MARK: - UI
@@ -56,6 +59,11 @@ class ReposViewController: UIViewController {
     lazy var collectionView: RepositoriesCollectionView = {
         let view = RepositoriesCollectionView()
         return view
+    }()
+    
+    lazy var collectionViewCell: RepositoriesCollectionViewCell = {
+        let cell = RepositoriesCollectionViewCell()
+        return cell
     }()
 }
 

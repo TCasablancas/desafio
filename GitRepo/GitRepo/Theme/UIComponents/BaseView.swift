@@ -12,7 +12,7 @@ import SnapKit
 class BaseView: UIView {
     lazy var container: UIView = {
         let view = UIView()
-        view.backgroundColor = Theme.default.orange
+        view.backgroundColor = Theme.default.gray
         return view
     }()
     
