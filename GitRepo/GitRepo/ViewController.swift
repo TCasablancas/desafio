@@ -23,8 +23,12 @@ class ViewController: UIViewController {
         
         self.view.layer.backgroundColor = UIColor.red.cgColor
     }
-
-
+    
+    //MARK: - UIComponents
+    lazy var tabelView: UITableView = {
+        let table = UITableView()
+        return table
+    }()
 }
 
 extension ViewController {
@@ -45,3 +49,7 @@ extension ViewController {
     }
 }
 
+// MARK: - Setup TableView
+extension ViewController {
+    
+}
