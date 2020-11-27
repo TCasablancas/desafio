@@ -1,0 +1,31 @@
+# Uncomment the next line to define a global platform for your project
+# platform :ios, '9.0'
+
+def defaultPods
+  pod 'SnapKit', '4.2.0'
+  pod 'ObjectMapper', '3.3.0'
+  pod 'Alamofire', '~> 4.5'
+  pod 'Kingfisher', '~> 4.0'
+end
+
+def testPods
+  pod 'Quick'
+  pod 'Nimble'
+end
+
+target 'GitRepo' do
+  #use_frameworks!
+  
+  defaultPods
+
+  target 'GitRepoTests' do
+    inherit! :search_paths
+    testPods
+  end
+
+  target 'GitRepoUITests' do
+    defaultPods
+    testPods
+  end
+
+end
