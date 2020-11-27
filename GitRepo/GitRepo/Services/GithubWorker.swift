@@ -12,11 +12,11 @@ import ObjectMapper
 
 class GithubWorker: Request {
     //Get Repo List
-    func loadRepoList(page: Int = 0, completion: @escaping (_ response: ResponseData) -> Void) {
+    func loadRepoList(page: Int = 0, completion: @escaping (_ response: ResponseData<GithubInfo>) -> Void) {
         let offset = page * GithubEndpoints.limit
         let url = GithubEndpoints.getReposEndpoint
         
-        Alamofire.request(url).responseJSON { (data) in
+        Alamofire.request(url).responseJSON { (data) -> Void in
             let statusCode = data.response?.statusCode
             switch data.result {
             case .success(let value):

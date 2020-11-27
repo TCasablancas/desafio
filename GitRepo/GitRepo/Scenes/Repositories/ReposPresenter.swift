@@ -14,5 +14,5 @@ protocol ReposPresenterPresentationLogic: class {
 
 class ReposPresenter: ReposPresenterPresentationLogic {
     weak var viewController: ReposViewController?
-    var reposTableView: ReposTableView?
+    var reposCollectionView: RepositoriesCollectionView?
 }

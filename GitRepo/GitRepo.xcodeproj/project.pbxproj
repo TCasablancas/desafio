@@ -23,8 +23,8 @@
 		EF5824772570A40D00196889 /* Color+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = EF5824762570A40D00196889 /* Color+Extension.swift */; };
 		EF5824792570A42E00196889 /* Theme.swift in Sources */ = {isa = PBXBuildFile; fileRef = EF5824782570A42E00196889 /* Theme.swift */; };
 		EF58247B2570A46300196889 /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = EF58247A2570A46300196889 /* Constants.swift */; };
-		EF58247D2570A5EF00196889 /* ReposTableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EF58247C2570A5EF00196889 /* ReposTableView.swift */; };
-		EF58247F2570A71500196889 /* RepoViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = EF58247E2570A71500196889 /* RepoViewCell.swift */; };
+		EF58247D2570A5EF00196889 /* RepositoriesCollectionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EF58247C2570A5EF00196889 /* RepositoriesCollectionView.swift */; };
+		EF58247F2570A71500196889 /* RepositoriesCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = EF58247E2570A71500196889 /* RepositoriesCollectionViewCell.swift */; };
 		EF5824832570A7D400196889 /* ReposViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EF5824822570A7D400196889 /* ReposViewController.swift */; };
 		EF5824852570A94500196889 /* ReposPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = EF5824842570A94500196889 /* ReposPresenter.swift */; };
 		EF5824872570AA4B00196889 /* ReposInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = EF5824862570AA4B00196889 /* ReposInteractor.swift */; };
@@ -79,8 +79,8 @@
 		EF5824762570A40D00196889 /* Color+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Color+Extension.swift"; sourceTree = "<group>"; };
 		EF5824782570A42E00196889 /* Theme.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Theme.swift; sourceTree = "<group>"; };
 		EF58247A2570A46300196889 /* Constants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
-		EF58247C2570A5EF00196889 /* ReposTableView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReposTableView.swift; sourceTree = "<group>"; };
-		EF58247E2570A71500196889 /* RepoViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RepoViewCell.swift; sourceTree = "<group>"; };
+		EF58247C2570A5EF00196889 /* RepositoriesCollectionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RepositoriesCollectionView.swift; sourceTree = "<group>"; };
+		EF58247E2570A71500196889 /* RepositoriesCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RepositoriesCollectionViewCell.swift; sourceTree = "<group>"; };
 		EF5824822570A7D400196889 /* ReposViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReposViewController.swift; sourceTree = "<group>"; };
 		EF5824842570A94500196889 /* ReposPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReposPresenter.swift; sourceTree = "<group>"; };
 		EF5824862570AA4B00196889 /* ReposInteractor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReposInteractor.swift; sourceTree = "<group>"; };
@@ -168,8 +168,8 @@
 			isa = PBXGroup;
 			children = (
 				EF58246E2570A25E00196889 /* BaseView.swift */,
-				EF58247C2570A5EF00196889 /* ReposTableView.swift */,
-				EF58247E2570A71500196889 /* RepoViewCell.swift */,
+				EF58247C2570A5EF00196889 /* RepositoriesCollectionView.swift */,
+				EF58247E2570A71500196889 /* RepositoriesCollectionViewCell.swift */,
 			);
 			path = UIComponents;
 			sourceTree = "<group>";
@@ -278,10 +278,10 @@
 			isa = PBXGroup;
 			children = (
 				EFEE2C5125707C1500703FA1 /* LaunchScreen.storyboard */,
+				EF58248A2570BF6600196889 /* Main.storyboard */,
 				EFEE2C4625707C1300703FA1 /* AppDelegate.swift */,
 				EFEE2C4825707C1300703FA1 /* SceneDelegate.swift */,
 				EF5824702570A29F00196889 /* ViewCode.swift */,
-				EF58248A2570BF6600196889 /* Main.storyboard */,
 			);
 			path = Common;
 			sourceTree = "<group>";
@@ -531,11 +531,11 @@
 				EF5824772570A40D00196889 /* Color+Extension.swift in Sources */,
 				EF58246C2570A0B900196889 /* Response.swift in Sources */,
 				EFEE2C7E25707F4B00703FA1 /* GithubEndpoints.swift in Sources */,
-				EF58247D2570A5EF00196889 /* ReposTableView.swift in Sources */,
+				EF58247D2570A5EF00196889 /* RepositoriesCollectionView.swift in Sources */,
 				EFEE2C4725707C1300703FA1 /* AppDelegate.swift in Sources */,
 				EFEE2C4925707C1300703FA1 /* SceneDelegate.swift in Sources */,
 				EF58245B2570895000196889 /* ServerError.swift in Sources */,
-				EF58247F2570A71500196889 /* RepoViewCell.swift in Sources */,
+				EF58247F2570A71500196889 /* RepositoriesCollectionViewCell.swift in Sources */,
 				EF5824662570934700196889 /* GithubWorker.swift in Sources */,
 				EF58246A2570A05800196889 /* GithubInfo.swift in Sources */,
 				EF5824872570AA4B00196889 /* ReposInteractor.swift in Sources */,

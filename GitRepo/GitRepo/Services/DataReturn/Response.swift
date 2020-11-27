@@ -8,8 +8,8 @@
 
 import Foundation
 
-enum ResponseData {
-    case success(model: GithubInfo)
+enum ResponseData<T> {
+    case success(model: T)
     case serverError(description: ServerError)
     case timeOut(description: ServerError)
     case noConnection(description: ServerError)

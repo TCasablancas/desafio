@@ -9,9 +9,33 @@
 import UIKit
 
 protocol ReposInteractorBusinessLogic {
-    
+    func getData()
 }
 
 class ReposInteractor: ReposInteractorBusinessLogic {
+    var worker: GithubWorker = GithubWorker()
+    var viewController: ReposViewController?
     var presenter: ReposPresenter?
+}
+
+//MARK: - Display Methods
+
+extension ReposInteractor {
+    func getData() {
+        self.worker.loadRepoList { (response) in
+            switch response {
+            case .success(let model):
+                let repos = model.data
+                let items = repos.items
+            case .serverError(let error):
+                let errorData = "\(error.statusCode), -, \(error.msgError)"
+                print("Server error: \(errorData) \n")
+                break
+            case .timeOut(let description):
+                print("Server error noConnection: \(description) \n")
+            case .noConnection(let description):
+                print("Server error timeOut: \(description) \n")
+            }
+        }
+    }
 }

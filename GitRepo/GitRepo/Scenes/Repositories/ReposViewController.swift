@@ -10,26 +10,42 @@ import UIKit
 import SnapKit
 
 class ReposViewController: UIViewController {
+    var presenter: ReposPresenter?
+    var interactor: ReposInteractor?
+    var worker: GithubWorker?
+    var currentPage = 0
     
     override func viewDidLoad() {
         super.viewDidLoad()
-//        setup()
         
-        self.view.layer.backgroundColor = Theme.default.orange.cgColor
-    }
-    
-    override func loadView() {
-        super.loadView()
-        setup()
+        self.interactor?.getData()
+
     }
     
 //    override init(nibName nibNameOrNil: String?, bundle nibBundleOrNil: Bundle?) {
 //        super.init(nibName: nibNameOrNil, bundle: nibBundleOrNil)
+//        setupConfig()
+//        setup()
 //    }
-//    
-//    required init?(coder: NSCoder) {
-//        fatalError("init(coder:) has not been implemented")
-//    }
+    
+    required init?(coder aDecoder: NSCoder) {
+        super.init(coder: aDecoder)
+        setupConfig()
+        setup()
+    }
+    
+    private func setupConfig() {
+        let viewController = self
+        let presenter = ReposPresenter()
+        let interactor = ReposInteractor()
+        let worker = GithubWorker()
+        viewController.presenter = presenter
+        viewController.interactor = interactor
+        viewController.worker = worker
+        interactor.viewController = viewController
+        interactor.presenter = presenter
+        interactor.worker = worker
+    }
     
     //MARK: - UI
     lazy var container: BaseView = {
@@ -37,16 +53,25 @@ class ReposViewController: UIViewController {
         return view
     }()
     
-    lazy var tableView: ReposTableView = {
-        let view = ReposTableView()
+    lazy var collectionView: RepositoriesCollectionView = {
+        let view = RepositoriesCollectionView()
         return view
     }()
 }
 
+//MARK:
+
+extension ReposViewController {
+    
+}
+
+
+//MAKR: - UIComponents
+
 extension ReposViewController: ViewCode {
     func viewHierarchy() {
         self.view.addSubview(container)
-        container.addSubview(tableView)
+        container.addSubview(collectionView)
     }
 
     func setupConstraints() {
@@ -55,11 +80,9 @@ extension ReposViewController: ViewCode {
             make.height.equalToSuperview()
         }
 
-        tableView.snp.makeConstraints { make in
-            make.width.equalToSuperview().offset(20)
-            make.height.equalToSuperview().offset(20)
-            make.centerX.equalToSuperview()
-            make.centerY.equalToSuperview()
+        collectionView.snp.makeConstraints { make in
+            make.width.equalToSuperview()
+            make.height.equalToSuperview()
         }
     }
 
