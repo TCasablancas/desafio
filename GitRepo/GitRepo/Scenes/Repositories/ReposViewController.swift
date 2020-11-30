@@ -66,16 +66,19 @@ class ReposViewController: UIViewController {
         ///Configuring Interactor Data
         interactor.viewController = viewController
         interactor.collectionView = collectionView
+        interactor.collectionViewCell = collectionViewCell
         interactor.presenter = presenter
         interactor.worker = worker
         interactor.router = router
         
         ///Cofiguring Cell Data
         collectionView.viewController = viewController
-        collectionView.dataInteract = interactor
+        collectionView.interact = interactor
+        collectionView.interactor = interactor
         collectionView.viewCell = collectionViewCell
         collectionViewCell.viewController = viewController
         collectionViewCell.repository = repository
+        collectionView.worker = worker
     }
     
     //MARK: - UI
@@ -104,6 +107,15 @@ class ReposViewController: UIViewController {
         let cell = RepositoriesCollectionViewCell()
         return cell
     }()
+    
+    lazy var activityIndicator: UIActivityIndicatorView = {
+        let activity = UIActivityIndicatorView()
+        activity.center = self.view.center
+        activity.hidesWhenStopped = true
+        activity.style = .large
+        activity.startAnimating()
+        return activity
+    }()
 }
 
 //MARK:
@@ -113,6 +125,7 @@ extension ReposViewController: ReposViewControllerDisplayLogic {
         collectionViewCell.repoTitle.text = viewModel.name
         collectionViewCell.repoDescription.text = viewModel.description
     }
+    
 }
 
 
@@ -121,6 +134,7 @@ extension ReposViewController: ReposViewControllerDisplayLogic {
 extension ReposViewController: ViewCode {
     func viewHierarchy() {
         self.view.addSubview(container)
+        self.view.addSubview(activityIndicator)
         container.addSubview(stackView)
     }
 

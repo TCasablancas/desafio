@@ -15,15 +15,18 @@ protocol ReposInteractorBusinessLogic {
 protocol ReposInteractorDataStore {
     var repository: [Repository] { get set }
     var datarepository: Repository? { get set }
+    var owner: [Owner] { get set }
 }
 
 class ReposInteractor: ReposInteractorBusinessLogic, ReposInteractorDataStore {
     var repository: [Repository] = []
+    var owner: [Owner] = []
     var data: GithubData?
     var router: GithubRouter?
     var worker: GithubWorker = GithubWorker()
     var viewController: ReposViewController?
     var collectionView: RepositoriesCollectionView?
+    var collectionViewCell: RepositoriesCollectionViewCell?
     var presenter: ReposPresenter?
     var datarepository: Repository?
     var rowAtIndex = 10
@@ -38,10 +41,14 @@ extension ReposInteractor {
         self.worker.loadRepoList() { (response) in
             switch response {
             case .success(let model):
+                
                 let repositories = model.items
                 self.repository = repositories
                 
+                
                 self.displayRepoCells()
+                self.reloadCell()
+                
             case .serverError(let error):
                 let errorData = "\(error.statusCode), -, \(error.msgError)"
                 print("Server error: \(errorData) \n")
@@ -58,6 +65,12 @@ extension ReposInteractor {
 extension ReposInteractor {
     func displayError() {
         
+    }
+    
+    func reloadCell() {
+//        self.collectionViewCell?.configureWith(with: item)
+        self.viewController?.collectionView.reload()
+        self.viewController?.activityIndicator.stopAnimating()
     }
     
     func displayRepoCells() {

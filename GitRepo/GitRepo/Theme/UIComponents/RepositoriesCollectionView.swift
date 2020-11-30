@@ -20,15 +20,22 @@ protocol RepositoriesCollectionViewInteractorLogic {
 
 class RepositoriesCollectionView: UIView {
     var interactor: RepositoriesCollectionViewInteractorLogic?
-    var dataInteract: ReposInteractor?
+    var interact: ReposInteractor?
     var viewController: ReposViewController?
     var viewCell: RepositoriesCollectionViewCell?
-    var repository: [Repository]?
+    var repository = [Repository]()
+    var owner = [Owner]()
     var dataRepository: Repository?
+    var dataOwner: Owner?
+    var indexPath: IndexPath?
+    
+    var counting: Int?
+    
+    var worker: GithubWorker?
     private let cellIdentifier = "cell"
     
     init(interactor: ReposInteractor? = nil) {
-        self.dataInteract = interactor
+        self.interact = interactor
         super.init(frame: .zero)
         setup()
         collectionView.delegate = self
@@ -80,25 +87,49 @@ class RepositoriesCollectionView: UIView {
 
 extension RepositoriesCollectionView: UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout {
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-//        return interactor?.itemsCount() ?? 10
-        return 10
+//        return self.counting ?? 1
+        return 20
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = self.collectionView.dequeueReusableCell(withReuseIdentifier: cellIdentifier, for: indexPath) as! RepositoriesCollectionViewCell
         
-        let interact = interactor
-//        if let repository = interact?.items(at: indexPath.row) { return UICollectionViewCell() }
         
         cell.delegate = self
-        cell.repoTitle.text = self.dataInteract?.title
-        cell.configureWith(repository ?? [])
         
+        self.worker?.loadRepoList { (result) in
+            switch result {
+            case .success(let model):
+                let repositories = model.items
+                self.repository = repositories
+
+                let index = indexPath.row
+                let item = self.repository[index]
+                let user = item.owner
+                let userindex = user?[index]
+                
+                cell.username.text = userindex?.login
+
+                self.counting = model.total_count
+                
+//                cell.configureWith(with: item, owner: user)
+                
+            case .serverError(let error):
+                let errorData = "\(error.statusCode), -, \(error.msgError)"
+                print("Server error: \(errorData) \n")
+                break
+            case .timeOut(let description):
+                print("Server error noConnection: \(description) \n")
+            case .noConnection(let description):
+                print("Server error timeOut: \(description) \n")
+            }
+        }
+//
         return cell
     }
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-        return CGSize(width: collectionView.bounds.width, height: 90)
+        return CGSize(width: collectionView.bounds.width, height: 130)
     }
     
     

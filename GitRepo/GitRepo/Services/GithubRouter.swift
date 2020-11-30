@@ -15,10 +15,12 @@ protocol GithubRouterRoutingLogic {
 protocol GithubRouterDataPass {
     var dataStore: ReposInteractorDataStore? { get }
     var repository: Repository? { get set }
+    var owner: Owner? { get set }
 }
 
 class GithubRouter: NSObject, GithubRouterRoutingLogic, GithubRouterDataPass {
     var repository: Repository?
+    var owner: Owner?
     var viewController: ReposViewController?
     var interactor: ReposInteractor?
     var dataStore: ReposInteractorDataStore?
@@ -33,6 +35,7 @@ class GithubRouter: NSObject, GithubRouterRoutingLogic, GithubRouterDataPass {
     func passDataToCell(destination: inout ReposInteractorDataStore) {
         guard let repositoryRow = viewController?.collectionView.collectionView.indexPathsForVisibleItems.first?.row else { return }
         destination.repository = dataStore?.repository ?? []
+        destination.owner = dataStore?.owner ?? []
     }
     
     func routeToCollectionCell() {
