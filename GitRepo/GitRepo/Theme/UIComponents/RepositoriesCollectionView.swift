@@ -112,7 +112,7 @@ extension RepositoriesCollectionView: UICollectionViewDelegate, UICollectionView
 
                 self.counting = model.total_count
                 
-//                cell.configureWith(with: item, owner: user)
+                cell.configureWith(with: item)
                 
             case .serverError(let error):
                 let errorData = "\(error.statusCode), -, \(error.msgError)"

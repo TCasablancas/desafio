@@ -21,14 +21,11 @@ class ReposViewController: UIViewController {
     var repository: [Repository] = []
     var selectedRepository: Repository?
     
-    var data: [GithubData] = []
-    
     var total = 0
     var currentPage = 0
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        self.interactor?.getData()
         setupConfig()
         setup()
     }

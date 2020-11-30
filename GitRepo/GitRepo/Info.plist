@@ -20,6 +20,15 @@
 	<string>1</string>
 	<key>LSRequiresIPhoneOS</key>
 	<true/>
+	<key>UIAppFonts</key>
+	<array>
+		<string>Rubik-Bold.otf</string>
+		<string>Rubik-Italic.otf</string>
+		<string>Rubik-Light.otf</string>
+		<string>Rubik-LightItalic.otf</string>
+		<string>Rubik-Medium.otf</string>
+		<string>Rubik-MediumItalic.otf</string>
+	</array>
 	<key>UIApplicationSceneManifest</key>
 	<dict>
 		<key>UIApplicationSupportsMultipleScenes</key>

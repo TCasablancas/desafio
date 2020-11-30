@@ -8,6 +8,7 @@
 
 import UIKit
 import SnapKit
+import FontAwesome_swift
 
 class Header: UIView {
     lazy var container: UIView = {
@@ -16,30 +17,39 @@ class Header: UIView {
     }()
     
     lazy var stackView: UIStackView = {
-        let stack = UIStackView(arrangedSubviews: [btnLeft, imgContainer, btnRight])
+        let stack = UIStackView(arrangedSubviews: [btnLeft, titleContainer, btnRight])
         stack.axis = .horizontal
         return stack
     }()
     
     lazy var btnLeft: UIButton = {
         let button = UIButton()
-        button.backgroundColor = Theme.default.black
+        button.titleLabel?.font = UIFont.fontAwesome(ofSize: 20, style: .solid)
+        button.setTitle(String.fontAwesomeIcon(name: .bars), for: .normal)
+        button.setTitleColor(Theme.default.purple, for: .normal)
         return button
     }()
     
     lazy var btnRight: UIButton = {
         let button = UIButton()
+        button.titleLabel?.font = UIFont.fontAwesome(ofSize: 20, style: .solid)
+        button.setTitle(String.fontAwesomeIcon(name: .search), for: .normal)
+        button.setTitleColor(Theme.default.purple, for: .normal)
         return button
     }()
     
-    lazy var imgContainer: UIView = {
+    lazy var titleContainer: UIView = {
         let view = UIView()
         return view
     }()
     
-    lazy var imageView: UIImageView = {
-        let view = UIImageView()
-        return view
+    public lazy var titleApp: UILabel = {
+        let label = UILabel()
+        label.text = "gitrepo"
+        label.font = UIFont(name: Font.rubikBold.rawValue, size: 24.0)
+        label.textAlignment = .center
+        label.textColor = Theme.default.purple
+        return label
     }()
     
     init() {
@@ -56,6 +66,7 @@ extension Header: ViewCode {
     func viewHierarchy() {
         self.addSubview(container)
         container.addSubview(stackView)
+        titleContainer.addSubview(titleApp)
     }
     
     func setupConstraints() {
@@ -84,5 +95,15 @@ extension Header: ViewCode {
             make.right.equalToSuperview()
         }
         
+        titleContainer.snp.makeConstraints { make in
+            make.top.bottom.equalToSuperview()
+            make.left.equalTo(btnLeft.snp.right)
+            make.right.equalTo(btnRight.snp.left)
+        }
+        
+        titleApp.snp.makeConstraints { make in
+            make.width.equalToSuperview()
+            make.height.equalToSuperview()
+        }
     }
 }

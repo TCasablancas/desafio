@@ -1,5 +1,6 @@
 PODS:
   - Alamofire (4.9.1)
+  - FontAwesome.swift (1.9.1)
   - Kingfisher (4.10.1)
   - Nimble (8.0.7)
   - ObjectMapper (3.3.0)
@@ -8,6 +9,7 @@ PODS:
 
 DEPENDENCIES:
   - Alamofire (~> 4.5)
+  - FontAwesome.swift
   - Kingfisher (~> 4.0)
   - Nimble
   - ObjectMapper (= 3.3.0)
@@ -17,6 +19,7 @@ DEPENDENCIES:
 SPEC REPOS:
   trunk:
     - Alamofire
+    - FontAwesome.swift
     - Kingfisher
     - Nimble
     - ObjectMapper
@@ -25,12 +28,13 @@ SPEC REPOS:
 
 SPEC CHECKSUMS:
   Alamofire: 85e8a02c69d6020a0d734f6054870d7ecb75cf18
+  FontAwesome.swift: 6b52cb7be66eacd28cbfaa0ca7ffd0de4a186a1d
   Kingfisher: c148cd7b47ebde9989f6bc7c27dcaa79d81279a0
   Nimble: a73af6ecd4c9106f434f3d55fc54570be3739e0b
   ObjectMapper: b612bf8c8e99c4dc0bb6013a51f7c27966ed5da9
   Quick: 7fb19e13be07b5dfb3b90d4f9824c855a11af40e
   SnapKit: fe8a619752f3f27075cc9a90244d75c6c3f27e2a
 
-PODFILE CHECKSUM: 77316df27b3405db98f6a1056b3f0336f1718336
+PODFILE CHECKSUM: d407d67fcf6bc0f7624c10ddccdbd7ce1c72ae09
 
 COCOAPODS: 1.9.1
