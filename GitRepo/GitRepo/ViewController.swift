@@ -37,7 +37,8 @@ extension ViewController {
         self.worker.loadRepoList(page: self.currentPage) { (result) in
             switch result {
             case .success(let response):
-                let data = response.data.items
+//                let data = response.data.items
+                break
             case .serverError(let description):
                 print("Server error: \(description) \n")
             case .noConnection(let description):

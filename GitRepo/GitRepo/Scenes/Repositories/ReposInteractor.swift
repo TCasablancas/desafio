@@ -12,23 +12,36 @@ protocol ReposInteractorBusinessLogic {
     func getData()
 }
 
-class ReposInteractor: ReposInteractorBusinessLogic {
-    var repository: Repository?
+protocol ReposInteractorDataStore {
+    var repository: [Repository] { get set }
+    var datarepository: Repository? { get set }
+}
+
+class ReposInteractor: ReposInteractorBusinessLogic, ReposInteractorDataStore {
+    var repository: [Repository] = []
     var data: GithubData?
+    var router: GithubRouter?
     var worker: GithubWorker = GithubWorker()
     var viewController: ReposViewController?
+    var collectionView: RepositoriesCollectionView?
     var presenter: ReposPresenter?
+    var datarepository: Repository?
+    var rowAtIndex = 10
+    
+    public var title = ""
 }
 
 //MARK: - Display Methods
 
 extension ReposInteractor {
     func getData() {
-        self.worker.loadRepoList { (response) in
+        self.worker.loadRepoList() { (response) in
             switch response {
             case .success(let model):
-                let repos = model.data
-                let items = repos.items
+                let repositories = model.items
+                self.repository = repositories
+                
+                self.displayRepoCells()
             case .serverError(let error):
                 let errorData = "\(error.statusCode), -, \(error.msgError)"
                 print("Server error: \(errorData) \n")
@@ -42,9 +55,35 @@ extension ReposInteractor {
     }
 }
 
+extension ReposInteractor {
+    func displayError() {
+        
+    }
+    
+    func displayRepoCells() {
+        let indexPath = currentIndex
+        let repo = self.items(at: indexPath)
+        
+        self.presenter?.presentRepository(response: ReposModels.RepositoryView.Response(
+            name: repo?.name, description: repo?.description, stars: repo?.stargazers_count, forks: repo?.forks_count)
+        )
+    }
+}
+
 extension ReposInteractor: RepositoriesCollectionViewInteractorLogic {
+    var currentIndex: Int {
+        return rowAtIndex
+    }
+    
     func itemsCount() -> Int {
-        let items = data?.items
-        return items?.count ?? 0
+        let items = repository.count
+        return items
+    }
+    
+    func items(at index: Int) -> Repository? {
+        if repository.count > index {
+            return repository[index]
+        }
+        return nil
     }
 }

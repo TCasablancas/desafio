@@ -10,9 +10,9 @@ import Foundation
 import ObjectMapper
 
 struct GithubData: Mappable {
-    var total_count: Int?
-    var incomplete_results: Bool?
-    var items: [Repository]?
+    var total_count: Int
+    var incomplete_results: Bool
+    var items: [Repository]
     
     init?(map: Map) {
         total_count = (try? map.value("total_count")) ?? 0

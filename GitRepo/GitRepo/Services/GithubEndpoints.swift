@@ -10,7 +10,7 @@ import Foundation
 
 class GithubEndpoints {
     static let basePath = "https://api.github.com/"
-    static let search = "search/repositories?q=language:Java&sort=stars&page=1"
+    static let search = "search/repositories?q=language:Swift&sort=stars&page=1"
     static let limit = 10
 
     public static var getReposEndpoint: String {

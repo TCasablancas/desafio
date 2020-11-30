@@ -15,26 +15,42 @@ protocol RepositoriesCollectionViewPresentationLogic: class {
 
 protocol RepositoriesCollectionViewInteractorLogic {
     func itemsCount() -> Int
+    func items(at index: Int) -> Repository?
 }
 
 class RepositoriesCollectionView: UIView {
-    weak var interactor: ReposInteractor?
+    var interactor: RepositoriesCollectionViewInteractorLogic?
+    var dataInteract: ReposInteractor?
     var viewController: ReposViewController?
     var viewCell: RepositoriesCollectionViewCell?
-    var repository: Repository?
-    var selectedRepository: Repository? = nil
+    var repository: [Repository]?
+    var dataRepository: Repository?
     private let cellIdentifier = "cell"
     
-    init() {
+    init(interactor: ReposInteractor? = nil) {
+        self.dataInteract = interactor
         super.init(frame: .zero)
         setup()
+        collectionView.delegate = self
+        collectionView.dataSource = self
     }
     
-    required init?(coder: NSCoder) {
-        fatalError("init(coder:) has not been implemented")
+    required init?(coder aDecoder: NSCoder) {
+        super.init(coder: aDecoder)
     }
     
     //MARK: - UI
+    lazy var container: UIView = {
+        let view = UIView()
+        view.backgroundColor = Theme.default.white
+        view.layer.cornerRadius = 10
+        view.layer.shadowColor = Theme.default.facebook.cgColor
+        view.layer.shadowOpacity = 0.2
+        view.layer.shadowRadius = 10
+        view.layer.shadowOffset = .init(width: 0, height: 10)
+        return view
+    }()
+    
     lazy var collectionView: UICollectionView = {
         let cell = UICollectionView(frame: self.frame, collectionViewLayout: flowLayout)
         cell.register(RepositoriesCollectionViewCell.self, forCellWithReuseIdentifier: cellIdentifier)
@@ -44,8 +60,9 @@ class RepositoriesCollectionView: UIView {
         cell.delegate = self
         cell.dataSource = self
         cell.clipsToBounds = true
-        cell.backgroundColor = Theme.default.white
-        cell.layer.cornerRadius = 10
+        cell.backgroundColor = .clear
+        cell.layer.cornerRadius = 5
+        cell.isUserInteractionEnabled = true
         return cell
     }()
     
@@ -63,24 +80,27 @@ class RepositoriesCollectionView: UIView {
 
 extension RepositoriesCollectionView: UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout {
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return interactor?.itemsCount() ?? 0
+//        return interactor?.itemsCount() ?? 10
+        return 10
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        guard
-            let cell = self.collectionView.dequeueReusableCell(withReuseIdentifier: cellIdentifier, for: indexPath) as? RepositoriesCollectionViewCell,
-            let interact = interactor,
-            let repository = interact.repository else { return UICollectionViewCell() }
+        let cell = self.collectionView.dequeueReusableCell(withReuseIdentifier: cellIdentifier, for: indexPath) as! RepositoriesCollectionViewCell
+        
+        let interact = interactor
+//        if let repository = interact?.items(at: indexPath.row) { return UICollectionViewCell() }
         
         cell.delegate = self
-        cell.configureWith(repository)
+        cell.repoTitle.text = self.dataInteract?.title
+        cell.configureWith(repository ?? [])
         
         return cell
     }
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-        return CGSize(width: collectionView.bounds.width, height: collectionView.bounds.height)
+        return CGSize(width: collectionView.bounds.width, height: 90)
     }
+    
     
 //    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
 //        self.selectedRepository = self.repository?[indexPath[0].row]
@@ -89,29 +109,37 @@ extension RepositoriesCollectionView: UICollectionViewDelegate, UICollectionView
 
 //MARK: -
 
-extension RepositoriesCollectionView: RepositoriesCollectionViewCellDelegate {
-    func routeToRepository() {
-        //
-    }
+extension RepositoriesCollectionView: RepositoriesCollectionViewCellDelegate, RepositoriesCollectionViewPresentationLogic {
+    func routeToRepository() {}
     
     func reload() {
-//        viewCell.reloadData()
+        collectionView.reloadData()
     }
 }
+
 
 //MARK: - Setup UI
 
 extension RepositoriesCollectionView: ViewCode {
     func viewHierarchy() {
-        self.addSubview(collectionView)
+        self.addSubview(container)
+        container.addSubview(collectionView)
     }
     
     func setupConstraints() {
-        collectionView.snp.makeConstraints { make in
+        container.snp.makeConstraints{ make in
             make.left.equalToSuperview().offset(20)
             make.right.equalToSuperview().offset(-20)
-            make.top.equalToSuperview().offset(120)
-            make.bottom.equalToSuperview().offset(-40)
+            make.bottom.equalToSuperview().offset(-20)
+            make.centerX.equalToSuperview()
+            make.centerY.equalToSuperview()
+        }
+        
+        collectionView.snp.makeConstraints { make in
+            make.left.equalToSuperview().offset(10)
+            make.right.equalToSuperview().offset(-10)
+            make.top.equalToSuperview().offset(10)
+            make.bottom.equalToSuperview().offset(-10)
             make.centerX.equalToSuperview()
         }
     }

@@ -12,18 +12,20 @@ import ObjectMapper
 
 class GithubWorker: Request {
     //Get Repo List
-    func loadRepoList(page: Int = 0, completion: @escaping (_ response: ResponseData<GithubInfo>) -> Void) {
+    func loadRepoList(page: Int = 0, completion: @escaping (_ response: ResponseGithubRepo<GithubData>) -> Void) {
         let offset = page * GithubEndpoints.limit
         let url = GithubEndpoints.getReposEndpoint
         
-        Alamofire.request(url).responseJSON { (data) -> Void in
+        Alamofire.request(url).responseJSON { (data: DataResponse<Any>) in
             let statusCode = data.response?.statusCode
+            
             switch data.result {
             case .success(let value):
-                let resultValue = value as? [String:Any]
+                guard let resultValue = value as? [String:Any] else { return }
+
                 if statusCode == 200 {
-                    let model = Mapper<GithubInfo>().map(JSONObject: resultValue)
-                    completion(.success(model: model!))
+                    guard let model = Mapper<GithubData>().map(JSON: resultValue) else { return }
+                    completion(.success(model: model))
                 }
             case .failure(let error):
                 let errorCode = error._code
@@ -35,7 +37,6 @@ class GithubWorker: Request {
                     completion(.timeOut(description: erro))
                 }
             }
-            
         }
     }
 }

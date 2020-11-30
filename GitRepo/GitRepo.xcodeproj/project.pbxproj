@@ -10,6 +10,9 @@
 		2B4DBDC384B0B51DB7D07496 /* libPods-GitRepo-GitRepoUITests.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 7063549139DA592F8C0E56A8 /* libPods-GitRepo-GitRepoUITests.a */; };
 		58DD9A78B08FD79EB99F806D /* libPods-GitRepo.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 750B74F52CD7F4C1F43E2F40 /* libPods-GitRepo.a */; };
 		B0371F81568290D8AB72DDBE /* libPods-GitRepoTests.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 49E8A46E4859138E76033C48 /* libPods-GitRepoTests.a */; };
+		EF3FB39D25717C3C00FB67C0 /* Header.swift in Sources */ = {isa = PBXBuildFile; fileRef = EF3FB39C25717C3C00FB67C0 /* Header.swift */; };
+		EF3FB39F2571ADA600FB67C0 /* ReposModels.swift in Sources */ = {isa = PBXBuildFile; fileRef = EF3FB39E2571ADA600FB67C0 /* ReposModels.swift */; };
+		EF3FB3A12575408B00FB67C0 /* GithubRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = EF3FB3A02575408B00FB67C0 /* GithubRouter.swift */; };
 		EF58245B2570895000196889 /* ServerError.swift in Sources */ = {isa = PBXBuildFile; fileRef = EF58245A2570895000196889 /* ServerError.swift */; };
 		EF58245D25708A5300196889 /* GithubData.swift in Sources */ = {isa = PBXBuildFile; fileRef = EF58245C25708A5300196889 /* GithubData.swift */; };
 		EF58245F25708B1B00196889 /* Repository.swift in Sources */ = {isa = PBXBuildFile; fileRef = EF58245E25708B1B00196889 /* Repository.swift */; };
@@ -66,6 +69,9 @@
 		7063549139DA592F8C0E56A8 /* libPods-GitRepo-GitRepoUITests.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-GitRepo-GitRepoUITests.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		750B74F52CD7F4C1F43E2F40 /* libPods-GitRepo.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-GitRepo.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		A88708E40B42AED9A62D36B4 /* Pods-GitRepo-GitRepoUITests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-GitRepo-GitRepoUITests.release.xcconfig"; path = "Target Support Files/Pods-GitRepo-GitRepoUITests/Pods-GitRepo-GitRepoUITests.release.xcconfig"; sourceTree = "<group>"; };
+		EF3FB39C25717C3C00FB67C0 /* Header.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Header.swift; sourceTree = "<group>"; };
+		EF3FB39E2571ADA600FB67C0 /* ReposModels.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReposModels.swift; sourceTree = "<group>"; };
+		EF3FB3A02575408B00FB67C0 /* GithubRouter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GithubRouter.swift; sourceTree = "<group>"; };
 		EF58245A2570895000196889 /* ServerError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ServerError.swift; sourceTree = "<group>"; };
 		EF58245C25708A5300196889 /* GithubData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GithubData.swift; sourceTree = "<group>"; };
 		EF58245E25708B1B00196889 /* Repository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Repository.swift; sourceTree = "<group>"; };
@@ -170,6 +176,7 @@
 				EF58246E2570A25E00196889 /* BaseView.swift */,
 				EF58247C2570A5EF00196889 /* RepositoriesCollectionView.swift */,
 				EF58247E2570A71500196889 /* RepositoriesCollectionViewCell.swift */,
+				EF3FB39C25717C3C00FB67C0 /* Header.swift */,
 			);
 			path = UIComponents;
 			sourceTree = "<group>";
@@ -200,6 +207,7 @@
 				EF5824822570A7D400196889 /* ReposViewController.swift */,
 				EF5824842570A94500196889 /* ReposPresenter.swift */,
 				EF5824862570AA4B00196889 /* ReposInteractor.swift */,
+				EF3FB39E2571ADA600FB67C0 /* ReposModels.swift */,
 			);
 			path = Repositories;
 			sourceTree = "<group>";
@@ -299,9 +307,9 @@
 			isa = PBXGroup;
 			children = (
 				EF58245C25708A5300196889 /* GithubData.swift */,
+				EF5824692570A05800196889 /* GithubInfo.swift */,
 				EF58245E25708B1B00196889 /* Repository.swift */,
 				EF58246025708BD800196889 /* Owner.swift */,
-				EF5824692570A05800196889 /* GithubInfo.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -311,6 +319,7 @@
 			children = (
 				EF582464257092E200196889 /* DataReturn */,
 				EFEE2C7D25707F4B00703FA1 /* GithubEndpoints.swift */,
+				EF3FB3A02575408B00FB67C0 /* GithubRouter.swift */,
 				EF5824652570934700196889 /* GithubWorker.swift */,
 			);
 			path = Services;
@@ -524,6 +533,7 @@
 				EF5824852570A94500196889 /* ReposPresenter.swift in Sources */,
 				EF58246F2570A25E00196889 /* BaseView.swift in Sources */,
 				EF5824832570A7D400196889 /* ReposViewController.swift in Sources */,
+				EF3FB39F2571ADA600FB67C0 /* ReposModels.swift in Sources */,
 				EFEE2C4B25707C1300703FA1 /* ViewController.swift in Sources */,
 				EF5824712570A29F00196889 /* ViewCode.swift in Sources */,
 				EFEE2C7C25707F0C00703FA1 /* Request.swift in Sources */,
@@ -534,7 +544,9 @@
 				EF58247D2570A5EF00196889 /* RepositoriesCollectionView.swift in Sources */,
 				EFEE2C4725707C1300703FA1 /* AppDelegate.swift in Sources */,
 				EFEE2C4925707C1300703FA1 /* SceneDelegate.swift in Sources */,
+				EF3FB3A12575408B00FB67C0 /* GithubRouter.swift in Sources */,
 				EF58245B2570895000196889 /* ServerError.swift in Sources */,
+				EF3FB39D25717C3C00FB67C0 /* Header.swift in Sources */,
 				EF58247F2570A71500196889 /* RepositoriesCollectionViewCell.swift in Sources */,
 				EF5824662570934700196889 /* GithubWorker.swift in Sources */,
 				EF58246A2570A05800196889 /* GithubInfo.swift in Sources */,

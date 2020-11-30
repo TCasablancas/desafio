@@ -9,50 +9,89 @@
 import UIKit
 import SnapKit
 
+protocol ReposViewControllerDisplayLogic: class {
+    func displayRepositories(viewModel: ReposModels.RepositoryView.ViewModel)
+}
+
 class ReposViewController: UIViewController {
     var presenter: ReposPresenter?
     var interactor: ReposInteractor?
     var worker: GithubWorker?
-    var repository: Repository?
+    var router: GithubRouter?
+    var repository: [Repository] = []
+    var selectedRepository: Repository?
+    
+    var data: [GithubData] = []
+    
+    var total = 0
     var currentPage = 0
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        setupConfig()
-        
-        
         self.interactor?.getData()
-        let nib = UINib(nibName: "RepositoriesCollectionViewCell", bundle: nil)
-        self.collectionView.collectionView.register(nib, forCellWithReuseIdentifier: "cell")
-    
+        setupConfig()
+        setup()
     }
     
-    override func viewWillAppear(_ animated: Bool) {
-        super.viewWillAppear(animated)
+    override init(nibName nibNameOrNil: String?, bundle nibBundleOrNil: Bundle?) {
+        super.init(nibName: nibNameOrNil, bundle: nibBundleOrNil)
         setup()
-    }   
+        setupConfig()
+    }
+
+    required init?(coder aDecoder: NSCoder) {
+        super.init(coder: aDecoder)
+        setupConfig()
+    }
     
     private func setupConfig() {
         let viewController = self
         let presenter = ReposPresenter()
         let interactor = ReposInteractor()
+        let router = GithubRouter()
         let worker = GithubWorker()
+        
         viewController.presenter = presenter
         viewController.interactor = interactor
         viewController.worker = worker
+        viewController.router = router
+        viewController.collectionView = collectionView
+        viewController.collectionViewCell = collectionViewCell
+        
+        presenter.viewController = viewController
+        presenter.reposCollectionView = collectionView
+        router.viewController = viewController
+        router.dataStore = interactor
+        
+        ///Configuring Interactor Data
         interactor.viewController = viewController
+        interactor.collectionView = collectionView
         interactor.presenter = presenter
         interactor.worker = worker
+        interactor.router = router
+        
+        ///Cofiguring Cell Data
         collectionView.viewController = viewController
-        collectionView.interactor = interactor
+        collectionView.dataInteract = interactor
         collectionView.viewCell = collectionViewCell
-        collectionView.repository = repository
-        viewController.collectionView = collectionView
+        collectionViewCell.viewController = viewController
+        collectionViewCell.repository = repository
     }
     
     //MARK: - UI
     lazy var container: BaseView = {
         let view = BaseView()
+        return view
+    }()
+    
+    lazy var stackView: UIStackView = {
+        let stack = UIStackView(arrangedSubviews: [header, collectionView])
+        stack.axis = .vertical
+        return stack
+    }()
+    
+    lazy var header: Header = {
+        let view = Header()
         return view
     }()
     
@@ -69,8 +108,11 @@ class ReposViewController: UIViewController {
 
 //MARK:
 
-extension ReposViewController {
-    
+extension ReposViewController: ReposViewControllerDisplayLogic {
+    func displayRepositories(viewModel: ReposModels.RepositoryView.ViewModel) {
+        collectionViewCell.repoTitle.text = viewModel.name
+        collectionViewCell.repoDescription.text = viewModel.description
+    }
 }
 
 
@@ -79,7 +121,7 @@ extension ReposViewController {
 extension ReposViewController: ViewCode {
     func viewHierarchy() {
         self.view.addSubview(container)
-        container.addSubview(collectionView)
+        container.addSubview(stackView)
     }
 
     func setupConstraints() {
@@ -87,10 +129,26 @@ extension ReposViewController: ViewCode {
             make.width.equalToSuperview()
             make.height.equalToSuperview()
         }
+        
+        stackView.snp.makeConstraints { make in
+            if #available(iOS 11.0, *) {
+                let window = UIApplication.shared.keyWindow
+                make.top.equalTo(window!.safeAreaInsets.top)
+            }
+            make.width.equalToSuperview()
+            make.bottom.equalToSuperview()
+        }
+        
+        header.snp.makeConstraints { make in
+            make.width.equalToSuperview()
+            make.top.equalToSuperview()
+            make.height.equalTo(100)
+        }
 
         collectionView.snp.makeConstraints { make in
             make.width.equalToSuperview()
-            make.height.equalToSuperview()
+            make.top.equalTo(header.snp.bottom).inset(40)
+            make.bottom.equalToSuperview()
         }
     }
 

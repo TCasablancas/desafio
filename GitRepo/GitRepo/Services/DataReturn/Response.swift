@@ -8,7 +8,7 @@
 
 import Foundation
 
-enum ResponseData<T> {
+enum ResponseGithubRepo<T> {
     case success(model: T)
     case serverError(description: ServerError)
     case timeOut(description: ServerError)
