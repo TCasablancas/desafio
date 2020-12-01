@@ -20,7 +20,6 @@ class ReposViewController: UIViewController {
     var router: GithubRouter?
     var repository: [Repository] = []
     var selectedRepository: Repository?
-    
     var total = 0
     var currentPage = 0
     

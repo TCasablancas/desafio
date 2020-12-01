@@ -49,6 +49,11 @@
 		EFFB67DA25759C9B0089321A /* Rubik-MediumItalic.otf in Resources */ = {isa = PBXBuildFile; fileRef = EFFB67D425759C9B0089321A /* Rubik-MediumItalic.otf */; };
 		EFFB67DB25759C9B0089321A /* Rubik-Italic.otf in Resources */ = {isa = PBXBuildFile; fileRef = EFFB67D525759C9B0089321A /* Rubik-Italic.otf */; };
 		EFFB67DD25759CC60089321A /* Fonts.swift in Sources */ = {isa = PBXBuildFile; fileRef = EFFB67DC25759CC60089321A /* Fonts.swift */; };
+		EFFB67DF2575A9590089321A /* PullRequestsVIewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EFFB67DE2575A9590089321A /* PullRequestsVIewController.swift */; };
+		EFFB67E1257671D60089321A /* PullRequestsInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = EFFB67E0257671D60089321A /* PullRequestsInteractor.swift */; };
+		EFFB67E3257672EA0089321A /* PullRequestsPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = EFFB67E2257672EA0089321A /* PullRequestsPresenter.swift */; };
+		EFFB67E525769B700089321A /* PullRequests.swift in Sources */ = {isa = PBXBuildFile; fileRef = EFFB67E425769B700089321A /* PullRequests.swift */; };
+		EFFB67E725769BB10089321A /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = EFFB67E625769BB10089321A /* User.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -122,6 +127,11 @@
 		EFFB67D425759C9B0089321A /* Rubik-MediumItalic.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Rubik-MediumItalic.otf"; sourceTree = "<group>"; };
 		EFFB67D525759C9B0089321A /* Rubik-Italic.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Rubik-Italic.otf"; sourceTree = "<group>"; };
 		EFFB67DC25759CC60089321A /* Fonts.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Fonts.swift; sourceTree = "<group>"; };
+		EFFB67DE2575A9590089321A /* PullRequestsVIewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PullRequestsVIewController.swift; sourceTree = "<group>"; };
+		EFFB67E0257671D60089321A /* PullRequestsInteractor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PullRequestsInteractor.swift; sourceTree = "<group>"; };
+		EFFB67E2257672EA0089321A /* PullRequestsPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PullRequestsPresenter.swift; sourceTree = "<group>"; };
+		EFFB67E425769B700089321A /* PullRequests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PullRequests.swift; sourceTree = "<group>"; };
+		EFFB67E625769BB10089321A /* User.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
 		FE371E2DA87CCB4094388122 /* Pods-GitRepo-GitRepoUITests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-GitRepo-GitRepoUITests.debug.xcconfig"; path = "Target Support Files/Pods-GitRepo-GitRepoUITests/Pods-GitRepo-GitRepoUITests.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -233,6 +243,9 @@
 		EF5824812570A79D00196889 /* PulRequests */ = {
 			isa = PBXGroup;
 			children = (
+				EFFB67DE2575A9590089321A /* PullRequestsVIewController.swift */,
+				EFFB67E0257671D60089321A /* PullRequestsInteractor.swift */,
+				EFFB67E2257672EA0089321A /* PullRequestsPresenter.swift */,
 			);
 			path = PulRequests;
 			sourceTree = "<group>";
@@ -329,6 +342,8 @@
 				EF5824692570A05800196889 /* GithubInfo.swift */,
 				EF58245E25708B1B00196889 /* Repository.swift */,
 				EF58246025708BD800196889 /* Owner.swift */,
+				EFFB67E425769B700089321A /* PullRequests.swift */,
+				EFFB67E625769BB10089321A /* User.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -608,12 +623,16 @@
 				EF5824852570A94500196889 /* ReposPresenter.swift in Sources */,
 				EF58246F2570A25E00196889 /* BaseView.swift in Sources */,
 				EF5824832570A7D400196889 /* ReposViewController.swift in Sources */,
+				EFFB67E525769B700089321A /* PullRequests.swift in Sources */,
 				EF3FB39F2571ADA600FB67C0 /* ReposModels.swift in Sources */,
+				EFFB67E1257671D60089321A /* PullRequestsInteractor.swift in Sources */,
 				EFEE2C4B25707C1300703FA1 /* ViewController.swift in Sources */,
 				EF5824712570A29F00196889 /* ViewCode.swift in Sources */,
 				EFEE2C7C25707F0C00703FA1 /* Request.swift in Sources */,
+				EFFB67DF2575A9590089321A /* PullRequestsVIewController.swift in Sources */,
 				EF58246125708BD800196889 /* Owner.swift in Sources */,
 				EF5824772570A40D00196889 /* Color+Extension.swift in Sources */,
+				EFFB67E3257672EA0089321A /* PullRequestsPresenter.swift in Sources */,
 				EF58246C2570A0B900196889 /* Response.swift in Sources */,
 				EFEE2C7E25707F4B00703FA1 /* GithubEndpoints.swift in Sources */,
 				EF58247D2570A5EF00196889 /* RepositoriesCollectionView.swift in Sources */,
@@ -630,6 +649,7 @@
 				EF58245F25708B1B00196889 /* Repository.swift in Sources */,
 				EF5824792570A42E00196889 /* Theme.swift in Sources */,
 				EF58247B2570A46300196889 /* Constants.swift in Sources */,
+				EFFB67E725769BB10089321A /* User.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

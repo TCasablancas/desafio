@@ -22,7 +22,7 @@ class GithubWorker: Request {
             switch data.result {
             case .success(let value):
                 guard let resultValue = value as? [String:Any] else { return }
-
+                
                 if statusCode == 200 {
                     guard let model = Mapper<GithubData>().map(JSON: resultValue) else { return }
                     completion(.success(model: model))

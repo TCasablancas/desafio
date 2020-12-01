@@ -27,9 +27,10 @@ class RepositoriesCollectionView: UIView {
     var owner = [Owner]()
     var dataRepository: Repository?
     var dataOwner: Owner?
-    var indexPath: IndexPath?
     
+    var indexPath: IndexPath?
     var counting: Int?
+    var repoUrl: String?
     
     var worker: GithubWorker?
     private let cellIdentifier = "cell"
@@ -103,16 +104,14 @@ extension RepositoriesCollectionView: UICollectionViewDelegate, UICollectionView
                 let repositories = model.items
                 self.repository = repositories
 
-                let index = indexPath.row
-                let item = self.repository[index]
-                let user = item.owner
-                let userindex = user?[index]
-                
-                cell.username.text = userindex?.login
-
-                self.counting = model.total_count
-                
-                cell.configureWith(with: item)
+                DispatchQueue.main.async {
+                    let index = indexPath.row
+                    let item = self.repository[index]
+                    
+                    self.repoUrl = item.url
+                    
+                    cell.configureWith(with: item)
+                }
                 
             case .serverError(let error):
                 let errorData = "\(error.statusCode), -, \(error.msgError)"
@@ -124,7 +123,7 @@ extension RepositoriesCollectionView: UICollectionViewDelegate, UICollectionView
                 print("Server error timeOut: \(description) \n")
             }
         }
-//
+
         return cell
     }
     
@@ -132,10 +131,10 @@ extension RepositoriesCollectionView: UICollectionViewDelegate, UICollectionView
         return CGSize(width: collectionView.bounds.width, height: 130)
     }
     
-    
-//    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-//        self.selectedRepository = self.repository?[indexPath[0].row]
-//    }
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        let index = indexPath.row
+        self.dataRepository = self.repository[index]
+    }
 }
 
 //MARK: -
