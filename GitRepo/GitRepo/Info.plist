@@ -22,12 +22,12 @@
 	<true/>
 	<key>UIAppFonts</key>
 	<array>
-		<string>Rubik-Bold.otf</string>
-		<string>Rubik-Italic.otf</string>
-		<string>Rubik-Light.otf</string>
-		<string>Rubik-LightItalic.otf</string>
-		<string>Rubik-Medium.otf</string>
-		<string>Rubik-MediumItalic.otf</string>
+		<string>Roboto-Medium.ttf</string>
+		<string>Roboto-Regular.ttf</string>
+		<string>Roboto-Thin.ttf</string>
+		<string>Poppins-ExtraLight.otf</string>
+		<string>Poppins-Regular.otf</string>
+		<string>Poppins-Bold.otf</string>
 	</array>
 	<key>UIApplicationSceneManifest</key>
 	<dict>

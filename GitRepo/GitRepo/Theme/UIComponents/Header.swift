@@ -46,7 +46,7 @@ class Header: UIView {
     public lazy var titleApp: UILabel = {
         let label = UILabel()
         label.text = "gitrepo"
-        label.font = UIFont(name: Font.rubikBold.rawValue, size: 24.0)
+        label.font = UIFont(name: "Poppins-Bold", size: 24.0)
         label.textAlignment = .center
         label.textColor = Theme.default.purple
         return label

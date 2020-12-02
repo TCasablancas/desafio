@@ -17,9 +17,10 @@ protocol RepositoriesCollectionViewCellDelegate {
 class RepositoriesCollectionViewCell: UICollectionViewCell {
     var delegate: RepositoriesCollectionViewCellDelegate?
     var viewController: ReposViewController?
+    var presenter: ReposPresenter?
     var router: GithubRouter?
     var interactor: ReposInteractor?
-    var repository = [Repository]()
+    var repository: [Repository] = []
     var owner = [Owner]()
     var datarepo: Repository?
     var dataowner: Owner?
@@ -46,15 +47,12 @@ class RepositoriesCollectionViewCell: UICollectionViewCell {
             self.numberForks.text = String(forks)
             self.numberStars.text = String(stars)
         }
-        
-        
-//        self.username.text = owner?.login
     }
     
-    private lazy var container: UIView = {
+    public lazy var container: UIView = {
         let view = UIView()
-        view.backgroundColor = Theme.default.gray
-        view.layer.cornerRadius = 5
+        view.layer.borderWidth = 1
+        view.layer.borderColor = Theme.default.border.cgColor
         return view
     }()
     
@@ -97,7 +95,7 @@ class RepositoriesCollectionViewCell: UICollectionViewCell {
     public lazy var repoTitle: UILabel = {
         let label = UILabel()
         label.text = "Test Title"
-        label.font = UIFont(name: Font.rubikBold.rawValue, size: 18.0)
+        label.font = UIFont(name: "Roboto-Medium", size: 22.0)
         return label
     }()
     
@@ -105,7 +103,9 @@ class RepositoriesCollectionViewCell: UICollectionViewCell {
         let label = UILabel()
         label.text = "Lorem ipsum dolor sit amet..."
         label.numberOfLines = 0
-        label.font = UIFont(name: Font.rubikLight.rawValue, size: 14.0)
+//        label.font = UIFont(name: Font.robotoThin.rawValue, size: 14.0)
+        label.font = UIFont(name: "Roboto-Regular", size: 14.0)
+        label.textColor = Theme.default.description
         return label
     }()
     
@@ -152,7 +152,7 @@ class RepositoriesCollectionViewCell: UICollectionViewCell {
         let label = UILabel()
         label.text = "456"
         label.textAlignment = .left
-        label.font = UIFont(name: Font.rubikMedium.rawValue, size: 14.0)
+        label.font = UIFont(name: Font.robotoMedium.rawValue, size: 14.0)
         return label
     }()
     
@@ -160,7 +160,7 @@ class RepositoriesCollectionViewCell: UICollectionViewCell {
         let label = UILabel()
         label.text = "359"
         label.textAlignment = .left
-        label.font = UIFont(name: Font.rubikMedium.rawValue, size: 14.0)
+        label.font = UIFont(name: Font.robotoMedium.rawValue, size: 14.0)
         return label
     }()
 }
@@ -182,7 +182,7 @@ extension RepositoriesCollectionViewCell: ViewCode {
     func setupConstraints() {
         container.snp.makeConstraints { make in
             make.width.equalToSuperview()
-            make.height.equalTo(120)
+            make.height.equalTo(140)
         }
         
         stackView.snp.makeConstraints{ make in
@@ -223,13 +223,13 @@ extension RepositoriesCollectionViewCell: ViewCode {
         
         repoTitle.snp.makeConstraints { make in
             make.width.equalToSuperview()
-            make.height.equalTo(20)
+            make.height.equalTo(30)
         }
         
         repoDescription.snp.makeConstraints { make in
             make.top.equalTo(repoTitle.snp.bottom)
             make.width.equalToSuperview()
-            make.height.equalTo(50)
+            make.height.equalTo(60)
         }
         
         imgContainer.snp.makeConstraints{ make in

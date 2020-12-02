@@ -27,19 +27,19 @@ class GithubRouter: NSObject, GithubRouterRoutingLogic, GithubRouterDataPass {
     
     func routeToPullRequests() {
         let destinyViewController = PullRequestsViewController()
-        var destinyDataStore = destinyViewController.interactor!.dataStore!
-        passDataToPullRequests(destination: &destinyDataStore)
+        var destinyDataStore = destinyViewController.interactor?.dataStore
+//        passDataToPullRequests(destination: &destinyDataStore!)
         navigateToPullRequests(destination: destinyViewController)
     }
     
     func passDataToPullRequests(destination: inout PullRequestsInteractorDataStore) {
         guard let pullRequestsRow = viewController?.collectionView.collectionView.indexPathsForVisibleItems.first?.row else { return }
-//        destination.
     }
     
     func navigateToPullRequests(destination: PullRequestsViewController) {
         destination.modalPresentationStyle = .overFullScreen
-        viewController?.present(destination, animated: true, completion: nil)
+//        viewController?.present(destination, animated: true, completion: nil)
+        viewController?.show(destination, sender: nil)
     }
     
     //MARK: - Passing Data and Routing to Cell

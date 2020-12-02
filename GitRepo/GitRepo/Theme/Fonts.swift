@@ -41,12 +41,12 @@ enum SizeFont {
 }
 
 public enum Font: String {
-    case rubikBold = "Rubik-Bold"
-    case rubikItalic = "Rubik-Italic"
-    case rubikLight = "Rubik-Light"
-    case rubikLightItalic = "Rubik-LightItalic"
-    case rubikMedium = "Rubik-Medium"
-    case rubikMediumItalic = "Rubik-MediumItalic"
+    case robotoMedium       = "Roboto-Medium.ttf"
+    case robotoRegular      = "Roboto-Regular.ttf"
+    case robotoThin         = "Roboto-Thin.ttf"
+    case poppinsExtraLight  = "Poppins-ExtraLight.otf"
+    case poppinsRegular     = "Poppins-Regular.otf"
+    case poppinsBold        = "Poppins-Bold.otf"
 
     private func scaledFont(font: UIFont) -> UIFont {
         if #available(iOS 11.0, *) {
@@ -60,18 +60,18 @@ public enum Font: String {
         let value = size * UIScreen.main.bounds.percentFontSize()
         
         switch self {
-        case .rubikBold:
-            return self.scaledFont(font: UIFont.systemFont(ofSize: value, weight: .bold))
-        case .rubikMedium:
+        case .robotoMedium:
             return self.scaledFont(font: UIFont.systemFont(ofSize: value, weight: .medium))
-        case .rubikItalic:
+        case .robotoRegular:
             return self.scaledFont(font: UIFont.systemFont(ofSize: value, weight: .regular))
-        case .rubikLight:
-            return self.scaledFont(font: UIFont.systemFont(ofSize: value, weight: .light))
-        case .rubikLightItalic:
-            return self.scaledFont(font: UIFont.systemFont(ofSize: value, weight: .light))
-        case .rubikMediumItalic:
-            return self.scaledFont(font: UIFont.systemFont(ofSize: value, weight: .medium))
+        case .robotoThin:
+            return self.scaledFont(font: UIFont.systemFont(ofSize: value, weight: .thin))
+        case .poppinsExtraLight:
+            return self.scaledFont(font: UIFont.systemFont(ofSize: value, weight: .ultraLight))
+        case .poppinsRegular:
+            return self.scaledFont(font: UIFont.systemFont(ofSize: value, weight: .regular))
+        case .poppinsBold:
+            return self.scaledFont(font: UIFont.systemFont(ofSize: value, weight: .bold))
         }
     }
 }

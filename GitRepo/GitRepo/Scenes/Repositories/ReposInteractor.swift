@@ -31,7 +31,7 @@ class ReposInteractor: ReposInteractorBusinessLogic, ReposInteractorDataStore {
     var datarepository: Repository?
     var rowAtIndex = 10
     
-    public var title = ""
+    public var repoCount: Int?
 }
 
 //MARK: - Display Methods
@@ -44,11 +44,27 @@ extension ReposInteractor {
                 
                 let repositories = model.items
                 self.repository = repositories
-                
-                
                 self.displayRepoCells()
-                self.reloadCell()
                 
+                self.repoCount = repositories.count
+                
+            case .serverError(let error):
+                let errorData = "\(error.statusCode), -, \(error.msgError)"
+                print("Server error: \(errorData) \n")
+                break
+            case .timeOut(let description):
+                print("Server error noConnection: \(description) \n")
+            case .noConnection(let description):
+                print("Server error timeOut: \(description) \n")
+            }
+        }
+    }
+    
+    func search() {
+        self.worker.loadPullRequestList() { (response) in
+            switch response {
+            case .success(let model):
+                let name = model.title
             case .serverError(let error):
                 let errorData = "\(error.statusCode), -, \(error.msgError)"
                 print("Server error: \(errorData) \n")
@@ -68,8 +84,7 @@ extension ReposInteractor {
     }
     
     func reloadCell() {
-//        self.collectionViewCell?.configureWith(with: item)
-        self.viewController?.collectionView.reload()
+//        self.viewController?.collectionView.reload()
         self.viewController?.activityIndicator.stopAnimating()
     }
     
@@ -89,8 +104,8 @@ extension ReposInteractor: RepositoriesCollectionViewInteractorLogic {
     }
     
     func itemsCount() -> Int {
-        let items = repository.count
-        return items
+//        return self.repoCount ?? 1
+        return 10
     }
     
     func items(at index: Int) -> Repository? {

@@ -19,5 +19,7 @@ class Theme {
         static let orange   = UIColor(hexString: Constants.Colors.Hex.primaryOrange)
         static let brown    = UIColor(hexString: Constants.Colors.Hex.primaryBrown)
         static let facebook = UIColor(hexString: Constants.Colors.Hex.fbColor)
+        static let border   = UIColor(hexString: Constants.Colors.Hex.lightGray)
+        static let description = UIColor(hexString: Constants.Colors.Hex.heavyGray)
     }
 }

@@ -27,6 +27,9 @@ class ReposViewController: UIViewController {
         super.viewDidLoad()
         setupConfig()
         setup()
+        
+        interactor?.getData()
+        interactor?.search()
     }
     
     override init(nibName nibNameOrNil: String?, bundle nibBundleOrNil: Bundle?) {
@@ -72,8 +75,10 @@ class ReposViewController: UIViewController {
         collectionView.interact = interactor
         collectionView.interactor = interactor
         collectionView.viewCell = collectionViewCell
+        collectionView.router = router
         collectionViewCell.viewController = viewController
         collectionViewCell.repository = repository
+        collectionViewCell.presenter = presenter
         collectionView.worker = worker
     }
     
@@ -121,7 +126,6 @@ extension ReposViewController: ReposViewControllerDisplayLogic {
         collectionViewCell.repoTitle.text = viewModel.name
         collectionViewCell.repoDescription.text = viewModel.description
     }
-    
 }
 
 

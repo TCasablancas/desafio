@@ -32,6 +32,9 @@
 		EF5824852570A94500196889 /* ReposPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = EF5824842570A94500196889 /* ReposPresenter.swift */; };
 		EF5824872570AA4B00196889 /* ReposInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = EF5824862570AA4B00196889 /* ReposInteractor.swift */; };
 		EF58248B2570BF6600196889 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = EF58248A2570BF6600196889 /* Main.storyboard */; };
+		EFBF8AC8257803A90027FBF5 /* Poppins-Bold.otf in Resources */ = {isa = PBXBuildFile; fileRef = EFBF8AC5257803A80027FBF5 /* Poppins-Bold.otf */; };
+		EFBF8AC9257803A90027FBF5 /* Poppins-ExtraLight.otf in Resources */ = {isa = PBXBuildFile; fileRef = EFBF8AC6257803A90027FBF5 /* Poppins-ExtraLight.otf */; };
+		EFBF8ACA257803A90027FBF5 /* Poppins-Regular.otf in Resources */ = {isa = PBXBuildFile; fileRef = EFBF8AC7257803A90027FBF5 /* Poppins-Regular.otf */; };
 		EFEE2C4725707C1300703FA1 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = EFEE2C4625707C1300703FA1 /* AppDelegate.swift */; };
 		EFEE2C4925707C1300703FA1 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = EFEE2C4825707C1300703FA1 /* SceneDelegate.swift */; };
 		EFEE2C4B25707C1300703FA1 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EFEE2C4A25707C1300703FA1 /* ViewController.swift */; };
@@ -42,18 +45,15 @@
 		EFEE2C7C25707F0C00703FA1 /* Request.swift in Sources */ = {isa = PBXBuildFile; fileRef = EFEE2C7B25707F0C00703FA1 /* Request.swift */; };
 		EFEE2C7E25707F4B00703FA1 /* GithubEndpoints.swift in Sources */ = {isa = PBXBuildFile; fileRef = EFEE2C7D25707F4B00703FA1 /* GithubEndpoints.swift */; };
 		EFFB67CE25758CA00089321A /* String+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = EFFB67CD25758CA00089321A /* String+Extension.swift */; };
-		EFFB67D625759C9B0089321A /* Rubik-LightItalic.otf in Resources */ = {isa = PBXBuildFile; fileRef = EFFB67D025759C9A0089321A /* Rubik-LightItalic.otf */; };
-		EFFB67D725759C9B0089321A /* Rubik-Bold.otf in Resources */ = {isa = PBXBuildFile; fileRef = EFFB67D125759C9A0089321A /* Rubik-Bold.otf */; };
-		EFFB67D825759C9B0089321A /* Rubik-Light.otf in Resources */ = {isa = PBXBuildFile; fileRef = EFFB67D225759C9A0089321A /* Rubik-Light.otf */; };
-		EFFB67D925759C9B0089321A /* Rubik-Medium.otf in Resources */ = {isa = PBXBuildFile; fileRef = EFFB67D325759C9B0089321A /* Rubik-Medium.otf */; };
-		EFFB67DA25759C9B0089321A /* Rubik-MediumItalic.otf in Resources */ = {isa = PBXBuildFile; fileRef = EFFB67D425759C9B0089321A /* Rubik-MediumItalic.otf */; };
-		EFFB67DB25759C9B0089321A /* Rubik-Italic.otf in Resources */ = {isa = PBXBuildFile; fileRef = EFFB67D525759C9B0089321A /* Rubik-Italic.otf */; };
 		EFFB67DD25759CC60089321A /* Fonts.swift in Sources */ = {isa = PBXBuildFile; fileRef = EFFB67DC25759CC60089321A /* Fonts.swift */; };
 		EFFB67DF2575A9590089321A /* PullRequestsVIewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EFFB67DE2575A9590089321A /* PullRequestsVIewController.swift */; };
 		EFFB67E1257671D60089321A /* PullRequestsInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = EFFB67E0257671D60089321A /* PullRequestsInteractor.swift */; };
 		EFFB67E3257672EA0089321A /* PullRequestsPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = EFFB67E2257672EA0089321A /* PullRequestsPresenter.swift */; };
 		EFFB67E525769B700089321A /* PullRequests.swift in Sources */ = {isa = PBXBuildFile; fileRef = EFFB67E425769B700089321A /* PullRequests.swift */; };
 		EFFB67E725769BB10089321A /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = EFFB67E625769BB10089321A /* User.swift */; };
+		EFFB67EB2576D1B90089321A /* Roboto-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = EFFB67E82576D1B90089321A /* Roboto-Regular.ttf */; };
+		EFFB67EC2576D1B90089321A /* Roboto-Thin.ttf in Resources */ = {isa = PBXBuildFile; fileRef = EFFB67E92576D1B90089321A /* Roboto-Thin.ttf */; };
+		EFFB67ED2576D1B90089321A /* Roboto-Medium.ttf in Resources */ = {isa = PBXBuildFile; fileRef = EFFB67EA2576D1B90089321A /* Roboto-Medium.ttf */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -104,6 +104,9 @@
 		EF5824842570A94500196889 /* ReposPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReposPresenter.swift; sourceTree = "<group>"; };
 		EF5824862570AA4B00196889 /* ReposInteractor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReposInteractor.swift; sourceTree = "<group>"; };
 		EF58248A2570BF6600196889 /* Main.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Main.storyboard; sourceTree = "<group>"; };
+		EFBF8AC5257803A80027FBF5 /* Poppins-Bold.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Poppins-Bold.otf"; sourceTree = "<group>"; };
+		EFBF8AC6257803A90027FBF5 /* Poppins-ExtraLight.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Poppins-ExtraLight.otf"; sourceTree = "<group>"; };
+		EFBF8AC7257803A90027FBF5 /* Poppins-Regular.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Poppins-Regular.otf"; sourceTree = "<group>"; };
 		EFEE2C4325707C1300703FA1 /* GitRepo.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = GitRepo.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		EFEE2C4625707C1300703FA1 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		EFEE2C4825707C1300703FA1 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -120,18 +123,15 @@
 		EFEE2C7B25707F0C00703FA1 /* Request.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Request.swift; sourceTree = "<group>"; };
 		EFEE2C7D25707F4B00703FA1 /* GithubEndpoints.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GithubEndpoints.swift; sourceTree = "<group>"; };
 		EFFB67CD25758CA00089321A /* String+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "String+Extension.swift"; sourceTree = "<group>"; };
-		EFFB67D025759C9A0089321A /* Rubik-LightItalic.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Rubik-LightItalic.otf"; sourceTree = "<group>"; };
-		EFFB67D125759C9A0089321A /* Rubik-Bold.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Rubik-Bold.otf"; sourceTree = "<group>"; };
-		EFFB67D225759C9A0089321A /* Rubik-Light.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Rubik-Light.otf"; sourceTree = "<group>"; };
-		EFFB67D325759C9B0089321A /* Rubik-Medium.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Rubik-Medium.otf"; sourceTree = "<group>"; };
-		EFFB67D425759C9B0089321A /* Rubik-MediumItalic.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Rubik-MediumItalic.otf"; sourceTree = "<group>"; };
-		EFFB67D525759C9B0089321A /* Rubik-Italic.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Rubik-Italic.otf"; sourceTree = "<group>"; };
 		EFFB67DC25759CC60089321A /* Fonts.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Fonts.swift; sourceTree = "<group>"; };
 		EFFB67DE2575A9590089321A /* PullRequestsVIewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PullRequestsVIewController.swift; sourceTree = "<group>"; };
 		EFFB67E0257671D60089321A /* PullRequestsInteractor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PullRequestsInteractor.swift; sourceTree = "<group>"; };
 		EFFB67E2257672EA0089321A /* PullRequestsPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PullRequestsPresenter.swift; sourceTree = "<group>"; };
 		EFFB67E425769B700089321A /* PullRequests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PullRequests.swift; sourceTree = "<group>"; };
 		EFFB67E625769BB10089321A /* User.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
+		EFFB67E82576D1B90089321A /* Roboto-Regular.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; name = "Roboto-Regular.ttf"; path = "GitRepo/Assets/Fonts/Roboto-Regular.ttf"; sourceTree = SOURCE_ROOT; };
+		EFFB67E92576D1B90089321A /* Roboto-Thin.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; name = "Roboto-Thin.ttf"; path = "GitRepo/Assets/Fonts/Roboto-Thin.ttf"; sourceTree = SOURCE_ROOT; };
+		EFFB67EA2576D1B90089321A /* Roboto-Medium.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; name = "Roboto-Medium.ttf"; path = "GitRepo/Assets/Fonts/Roboto-Medium.ttf"; sourceTree = SOURCE_ROOT; };
 		FE371E2DA87CCB4094388122 /* Pods-GitRepo-GitRepoUITests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-GitRepo-GitRepoUITests.debug.xcconfig"; path = "Target Support Files/Pods-GitRepo-GitRepoUITests/Pods-GitRepo-GitRepoUITests.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -200,9 +200,9 @@
 			isa = PBXGroup;
 			children = (
 				EF58246E2570A25E00196889 /* BaseView.swift */,
+				EF3FB39C25717C3C00FB67C0 /* Header.swift */,
 				EF58247C2570A5EF00196889 /* RepositoriesCollectionView.swift */,
 				EF58247E2570A71500196889 /* RepositoriesCollectionViewCell.swift */,
-				EF3FB39C25717C3C00FB67C0 /* Header.swift */,
 			);
 			path = UIComponents;
 			sourceTree = "<group>";
@@ -362,12 +362,12 @@
 		EFFB67CF25759C640089321A /* Fonts */ = {
 			isa = PBXGroup;
 			children = (
-				EFFB67D125759C9A0089321A /* Rubik-Bold.otf */,
-				EFFB67D525759C9B0089321A /* Rubik-Italic.otf */,
-				EFFB67D225759C9A0089321A /* Rubik-Light.otf */,
-				EFFB67D025759C9A0089321A /* Rubik-LightItalic.otf */,
-				EFFB67D325759C9B0089321A /* Rubik-Medium.otf */,
-				EFFB67D425759C9B0089321A /* Rubik-MediumItalic.otf */,
+				EFBF8AC5257803A80027FBF5 /* Poppins-Bold.otf */,
+				EFBF8AC6257803A90027FBF5 /* Poppins-ExtraLight.otf */,
+				EFBF8AC7257803A90027FBF5 /* Poppins-Regular.otf */,
+				EFFB67EA2576D1B90089321A /* Roboto-Medium.ttf */,
+				EFFB67E82576D1B90089321A /* Roboto-Regular.ttf */,
+				EFFB67E92576D1B90089321A /* Roboto-Thin.ttf */,
 			);
 			path = Fonts;
 			sourceTree = "<group>";
@@ -481,15 +481,15 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				EFFB67D625759C9B0089321A /* Rubik-LightItalic.otf in Resources */,
 				EF58248B2570BF6600196889 /* Main.storyboard in Resources */,
-				EFFB67D925759C9B0089321A /* Rubik-Medium.otf in Resources */,
+				EFFB67EB2576D1B90089321A /* Roboto-Regular.ttf in Resources */,
+				EFBF8AC8257803A90027FBF5 /* Poppins-Bold.otf in Resources */,
+				EFBF8AC9257803A90027FBF5 /* Poppins-ExtraLight.otf in Resources */,
+				EFBF8ACA257803A90027FBF5 /* Poppins-Regular.otf in Resources */,
+				EFFB67EC2576D1B90089321A /* Roboto-Thin.ttf in Resources */,
 				EFEE2C5325707C1500703FA1 /* LaunchScreen.storyboard in Resources */,
-				EFFB67DB25759C9B0089321A /* Rubik-Italic.otf in Resources */,
 				EFEE2C5025707C1500703FA1 /* Assets.xcassets in Resources */,
-				EFFB67D825759C9B0089321A /* Rubik-Light.otf in Resources */,
-				EFFB67DA25759C9B0089321A /* Rubik-MediumItalic.otf in Resources */,
-				EFFB67D725759C9B0089321A /* Rubik-Bold.otf in Resources */,
+				EFFB67ED2576D1B90089321A /* Roboto-Medium.ttf in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

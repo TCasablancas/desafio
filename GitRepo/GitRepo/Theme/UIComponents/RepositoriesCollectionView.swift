@@ -21,16 +21,18 @@ protocol RepositoriesCollectionViewInteractorLogic {
 class RepositoriesCollectionView: UIView {
     var interactor: RepositoriesCollectionViewInteractorLogic?
     var interact: ReposInteractor?
+    var router: GithubRouter?
     var viewController: ReposViewController?
     var viewCell: RepositoriesCollectionViewCell?
+    var pullRequestsViewController: PullRequestsViewController?
+    
     var repository = [Repository]()
     var owner = [Owner]()
-    var dataRepository: Repository?
+    var repositories: [Repository] = []
+    var repositorySelected: Repository? = nil
     var dataOwner: Owner?
     
-    var indexPath: IndexPath?
-    var counting: Int?
-    var repoUrl: String?
+    var itemCount: [GithubData] = []
     
     var worker: GithubWorker?
     private let cellIdentifier = "cell"
@@ -67,10 +69,12 @@ class RepositoriesCollectionView: UIView {
         cell.isPagingEnabled = true
         cell.delegate = self
         cell.dataSource = self
-        cell.clipsToBounds = true
+//        cell.clipsToBounds = true
         cell.backgroundColor = .clear
         cell.layer.cornerRadius = 5
         cell.isUserInteractionEnabled = true
+        cell.layer.borderWidth = 1
+        cell.layer.borderColor = Theme.default.border.cgColor
         return cell
     }()
     
@@ -87,30 +91,24 @@ class RepositoriesCollectionView: UIView {
 //MARK: - CollectionViewDelegate Setup
 
 extension RepositoriesCollectionView: UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout {
-    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-//        return self.counting ?? 1
-        return 20
-    }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = self.collectionView.dequeueReusableCell(withReuseIdentifier: cellIdentifier, for: indexPath) as! RepositoriesCollectionViewCell
-        
-        
+                
         cell.delegate = self
-        
+
         self.worker?.loadRepoList { (result) in
             switch result {
             case .success(let model):
                 let repositories = model.items
                 self.repository = repositories
-
+                
                 DispatchQueue.main.async {
                     let index = indexPath.row
                     let item = self.repository[index]
                     
-                    self.repoUrl = item.url
-                    
                     cell.configureWith(with: item)
+                    self.interact?.reloadCell()
                 }
                 
             case .serverError(let error):
@@ -127,20 +125,32 @@ extension RepositoriesCollectionView: UICollectionViewDelegate, UICollectionView
         return cell
     }
     
+    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+        return self.interact?.repoCount ?? 1
+    }
+    
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-        return CGSize(width: collectionView.bounds.width, height: 130)
+        return CGSize(width: collectionView.bounds.width, height: 139)
     }
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        let index = indexPath.row
-        self.dataRepository = self.repository[index]
+//        let indexPath = indexPath.item
+        if let cell = collectionView.cellForItem(at: indexPath) {
+            cell.backgroundColor = Theme.default.gray
+        }
+        self.repositorySelected = self.repository[indexPath.item]
+        self.viewController?.present(PullRequestsViewController(), animated: true, completion: nil)
+//        self.routeToRepository()
+        print("CLICADO!!!")
     }
 }
 
 //MARK: -
 
 extension RepositoriesCollectionView: RepositoriesCollectionViewCellDelegate, RepositoriesCollectionViewPresentationLogic {
-    func routeToRepository() {}
+    func routeToRepository() {
+        router?.routeToPullRequests()
+    }
     
     func reload() {
         collectionView.reloadData()
@@ -158,9 +168,9 @@ extension RepositoriesCollectionView: ViewCode {
     
     func setupConstraints() {
         container.snp.makeConstraints{ make in
-            make.left.equalToSuperview().offset(20)
-            make.right.equalToSuperview().offset(-20)
-            make.bottom.equalToSuperview().offset(-20)
+            make.left.equalToSuperview().offset(10)
+            make.right.equalToSuperview().offset(-10)
+            make.bottom.equalToSuperview()
             make.centerX.equalToSuperview()
             make.centerY.equalToSuperview()
         }
@@ -169,7 +179,7 @@ extension RepositoriesCollectionView: ViewCode {
             make.left.equalToSuperview().offset(10)
             make.right.equalToSuperview().offset(-10)
             make.top.equalToSuperview().offset(10)
-            make.bottom.equalToSuperview().offset(-10)
+            make.bottom.equalToSuperview().offset(-20)
             make.centerX.equalToSuperview()
         }
     }

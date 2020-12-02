@@ -15,6 +15,7 @@ struct Repository: Mappable {
     var description: String?
     var stargazers_count: Int?
     var forks_count: Int?
+    var pulls_url: String?
     var owner: [Owner]?
     
     init?(map: Map) {
@@ -23,6 +24,7 @@ struct Repository: Mappable {
         description = (try? map.value("description")) ?? ""
         stargazers_count = (try? map.value("stargazers_count")) ?? 0
         forks_count = (try? map.value("forks_count")) ?? 0
+        pulls_url = (try? map.value("pulls_url")) ?? ""
         owner = [(try? map.value("owner")) ?? Owner(map: map)!]
     }
     
@@ -32,6 +34,7 @@ struct Repository: Mappable {
         description <- map["description"]
         stargazers_count <- map["stargazers_count"]
         forks_count <- map["forks_count"]
+        pulls_url <- map["pulls_url"]
         owner <- map["owner"]
     }
 }

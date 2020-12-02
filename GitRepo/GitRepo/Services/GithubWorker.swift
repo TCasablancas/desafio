@@ -18,7 +18,7 @@ class GithubWorker: Request {
         
         Alamofire.request(url).responseJSON { (data: DataResponse<Any>) in
             let statusCode = data.response?.statusCode
-            
+
             switch data.result {
             case .success(let value):
                 guard let resultValue = value as? [String:Any] else { return }
@@ -27,6 +27,34 @@ class GithubWorker: Request {
                     guard let model = Mapper<GithubData>().map(JSON: resultValue) else { return }
                     completion(.success(model: model))
                 }
+            case .failure(let error):
+                let errorCode = error._code
+                if errorCode == -1009 {
+                    let erro = ServerError(msgError: error.localizedDescription, statusCode: errorCode)
+                    completion(.noConnection(description: erro))
+                } else if errorCode == -1001 {
+                    let erro = ServerError(msgError: error.localizedDescription, statusCode: errorCode)
+                    completion(.timeOut(description: erro))
+                }
+            }
+        }
+    }
+    
+    // Get Pull Request List
+    func loadPullRequestList(completion: @escaping (_ response: ResponseGithubRepo<PullRequests>) -> Void) {
+        let url = GithubEndpoints.getPullRequestsEndpoint
+        
+        Alamofire.request(url).responseJSON { (data: DataResponse<Any>) in
+            let statusCode = data.response?.statusCode
+            switch data.result {
+            case .success(let value):
+                let resultValue = value as? [String:Any] ?? [:]
+
+                if statusCode == 200 {
+                    guard let model = Mapper<PullRequests>().map(JSON: resultValue) else { return }
+                    print(completion(.success(model: model)))
+                }
+                
             case .failure(let error):
                 let errorCode = error._code
                 if errorCode == -1009 {
