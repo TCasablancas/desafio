@@ -9,7 +9,7 @@
 import UIKit
 
 protocol PullRequestsInteractorBusinessLogic {
-    
+    func getPullRequests()
 }
 
 protocol PullRequestsInteractorDataStore {
@@ -19,4 +19,8 @@ protocol PullRequestsInteractorDataStore {
 class PullRequestsInteractor: PullRequestsInteractorBusinessLogic, PullRequestsInteractorDataStore {
     var dataStore: PullRequestsInteractorDataStore?
     var worker: GithubWorker = GithubWorker()
+    
+    func getPullRequests() {
+        
+    }
 }

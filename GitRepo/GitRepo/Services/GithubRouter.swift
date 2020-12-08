@@ -26,10 +26,10 @@ class GithubRouter: NSObject, GithubRouterRoutingLogic, GithubRouterDataPass {
     var dataStore: RepositoriesInteractorDataStore?
     
     func routeToPullRequests() {
-        let destinyViewController = PullRequestsViewController()
-        var destinyDataStore = destinyViewController.interactor?.dataStore
-//        passDataToPullRequests(destination: &destinyDataStore!)
-        navigateToPullRequests(destination: destinyViewController)
+//        let destinyViewController = PullRequestsViewController()
+//        var destinyDataStore = destinyViewController.interactor?.dataStore
+////        passDataToPullRequests(destination: &destinyDataStore!)
+//        navigateToPullRequests(destination: destinyViewController)
     }
     
     func passDataToPullRequests(destination: inout PullRequestsInteractorDataStore) {

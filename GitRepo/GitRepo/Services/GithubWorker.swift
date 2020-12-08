@@ -12,12 +12,13 @@ import ObjectMapper
 
 protocol RepoWorker {
     func loadRepoList(page: Int, completion: @escaping (_ response: ResponseGithubRepo<GithubData>) -> Void)
+    func loadPullRequestList(completion: @escaping (_ response: ResponseGithubRepo<PullRequests>) -> Void)
 }
 
 class GithubWorker: Request, RepoWorker {
     //Get Repo List
     func loadRepoList(page: Int = 0, completion: @escaping (_ response: ResponseGithubRepo<GithubData>) -> Void) {
-        let offset = page * GithubEndpoints.limit
+        let offset = page * 10
         let url = GithubEndpoints.getReposEndpoint
         
         Alamofire.request(url).responseJSON { (data: DataResponse<Any>) in
@@ -46,7 +47,8 @@ class GithubWorker: Request, RepoWorker {
     
     // Get Pull Request List
     func loadPullRequestList(completion: @escaping (_ response: ResponseGithubRepo<PullRequests>) -> Void) {
-        let url = GithubEndpoints.getPullRequestsEndpoint
+//        let url = GithubEndpoints.getPullRequestsEndpoint
+        let url = "https://api.github.com/repos/vsouza/awesome-ios/pulls"
         
         Alamofire.request(url).responseJSON { (data: DataResponse<Any>) in
             let statusCode = data.response?.statusCode

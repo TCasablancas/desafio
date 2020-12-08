@@ -15,22 +15,7 @@ private let reuseIdentifier = "RepositoriesCollectionViewCell"
 class RepositoriesViewController: UICollectionViewController {
     
     //MARK: - UI
-    lazy var container: BaseView = {
-        let view = BaseView()
-        return view
-    }()
-    
-    lazy var header: Header = {
-        let view = Header()
-        return view
-    }()
-    
-    lazy var stackView: UIStackView = {
-        let stack = UIStackView(arrangedSubviews: [header, collectionView])
-        stack.axis = .vertical
-        return stack
-    }()
-    
+
     lazy var activityIndicator: UIActivityIndicatorView = {
         let activity = UIActivityIndicatorView()
         activity.center = self.view.center
@@ -50,15 +35,13 @@ class RepositoriesViewController: UICollectionViewController {
         return button
     }()
     
-    private let router: GithubRouter?
     private let interactor: RepositoriesInteractorBusinessLogic
-    public lazy var repositories: [RepositoriesModels.RepositoryView.ViewModel] = []
+    public lazy var repositories: [GithubModels.RepositoryView.ViewModel] = []
     
-    var didSelect: (RepositoriesModels.RepositoryView.ViewModel) -> Void = { _ in }
+    var didSelect: (GithubModels.RepositoryView.ViewModel) -> Void = { _ in }
     
-    init(interactor: ReposInteractor, router: GithubRouter) {
+    init(interactor: ReposInteractor) {
         self.interactor = interactor
-        self.router = router
         
         let flow = UICollectionViewFlowLayout()
         flow.sectionInset = UIEdgeInsets(top: 0, left: 0, bottom: 0, right: 0)
@@ -135,7 +118,7 @@ class RepositoriesViewController: UICollectionViewController {
     override func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         let item = repositories[indexPath.item]
         self.routeToRepository(item)
-        self.navigationController?.pushViewController(PullRequestsViewController(), animated: true)
+//        self.navigationController?.pushViewController(PullRequestsViewController(name: item.name ?? ""), animated: true)
     }
 }
 
@@ -143,7 +126,7 @@ class RepositoriesViewController: UICollectionViewController {
 
 extension RepositoriesViewController: RepositoriesCollectionViewCellDelegate {
     
-    func routeToRepository(_ repository: RepositoriesModels.RepositoryView.ViewModel) {
+    func routeToRepository(_ repository: GithubModels.RepositoryView.ViewModel) {
         didSelect(repository)
     }
 }
@@ -155,7 +138,7 @@ extension RepositoriesViewController: RepositoriesPresenterOutput {
         self.activityIndicator.startAnimating()
     }
     
-    func displayRepositories(viewModel: [RepositoriesModels.RepositoryView.ViewModel]) {
+    func displayRepositories(viewModel: [GithubModels.RepositoryView.ViewModel]) {
         repositories = viewModel
         collectionView.reloadData()
     }
@@ -175,31 +158,10 @@ extension RepositoriesViewController: UICollectionViewDelegateFlowLayout {
 
 extension RepositoriesViewController: ViewCode {
     func viewHierarchy() {
-        self.view.addSubview(container)
         self.view.addSubview(activityIndicator)
-        container.addSubview(stackView)
     }
     
     func setupConstraints() {
-        container.snp.makeConstraints{ make in
-            make.width.equalToSuperview()
-            make.height.equalToSuperview()
-        }
         
-        stackView.snp.makeConstraints { make in
-            if #available(iOS 11.0, *) {
-                make.top.equalTo(self.view.safeAreaLayoutGuide.snp.top)
-                make.bottom.equalTo(self.view.safeAreaLayoutGuide.snp.bottom)
-            }
-            make.left.equalToSuperview().offset(20)
-            make.right.equalToSuperview().offset(-20)
-            make.bottom.equalToSuperview().offset(-100)
-        }
-        
-        header.snp.makeConstraints { make in
-            make.width.equalToSuperview()
-            make.top.equalToSuperview()
-            make.height.equalTo(100)
-        }
     }
 }

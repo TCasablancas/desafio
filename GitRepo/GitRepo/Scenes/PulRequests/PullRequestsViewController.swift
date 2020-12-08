@@ -14,8 +14,12 @@ protocol PullRequestsDisplayLogic: class {
 }
 
 class PullRequestsViewController: UIViewController {
-    var interactor: PullRequestsInteractor?
+    private let interactor: PullRequestsInteractorBusinessLogic?
     var worker: GithubWorker?
+    var repoVC: RepositoriesViewController?
+    
+    var name: String?
+    var pulls: String?
     
     private lazy var container: UIScrollView = {
         let view = UIScrollView()
@@ -27,6 +31,7 @@ class PullRequestsViewController: UIViewController {
         setup()
         
         self.view.backgroundColor = Theme.default.gray
+        print(self.name)
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -37,26 +42,25 @@ class PullRequestsViewController: UIViewController {
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
     }
+    
+    init(name: String, pulls: String) {
+        self.name = name
+        self.pulls = pulls
+        super.init(nibName: nil, bundle: nil)
+    }
+    
+    required init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
 }
 
 extension PullRequestsViewController {
     private func setupNavigationBar() {
-        let appearance =  UINavigationBar.appearance()
         let navigation = self.navigationController?.navigationBar
         
-        title = "reponame"
+        title = self.name
         navigation?.topItem?.backButtonTitle = ""
         navigation?.tintColor = Theme.default.description
-        navigation?.backgroundColor = Theme.default.gray
-        navigation?.shadowImage = UIImage()
-        
-        let attrs = [
-            NSAttributedString.Key.foregroundColor: UIColor.red,
-            NSAttributedString.Key.font: UIFont(name: Font.poppinsBold.rawValue, size: 24)
-        ]
-
-        appearance.largeTitleTextAttributes = attrs
-        
     }
 }
 

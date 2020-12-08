@@ -18,12 +18,28 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         // Use this method to optionally configure and attach the UIWindow `window` to the provided UIWindowScene `scene`.
         // If using a storyboard, the `window` property will automatically be initialized and attached to the scene.
         // This delegate does not imply the connecting scene or session are new (see `application:configurationForConnectingSceneSession` instead).
+        let navigation = self.navigationController?.navigationBar
+        let appearance = UINavigationBar.appearance()
+        
+        let attrs = [
+            NSAttributedString.Key.foregroundColor: Theme.default.description,
+            NSAttributedString.Key.font: UIFont(name: "Poppins-Bold", size: 24)
+        ] as [ NSAttributedString.Key : Any ]
+        
+        appearance.largeTitleTextAttributes = attrs
+        appearance.prefersLargeTitles = true
+        appearance.titleTextAttributes = attrs
+        appearance.isTranslucent = true
+        appearance.backgroundColor = Theme.default.gray
+        
+        navigation?.backgroundColor = Theme.default.gray
+        navigation?.shadowImage = UIImage()
+        
         guard let windowScene = (scene as? UIWindowScene) else { return }
         
         let presenter = RepositoriesPresenter()
         let interactor = ReposInteractor(output: presenter, worker: GithubWorker())
-        let router = GithubRouter()
-        let rootVC = RepositoriesViewController(interactor: interactor, router: router)
+        let rootVC = RepositoriesViewController(interactor: interactor)
         rootVC.didSelect = didSelectRepository
         presenter.output = rootVC
         
@@ -37,10 +53,16 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         self.window = window
     }
     
-    private func didSelectRepository(_ repository: RepositoriesModels.RepositoryView.ViewModel) {
-        print("Show pull requestviews")
-//        let pullRequestsVC = PullRequestsViewController()
-//        self.navigationController?.pushViewController(pullRequestsVC, animated: true)
+    private func didSelectRepository(_ repository: GithubModels.RepositoryView.ViewModel) {
+        guard
+            let developer = repository.developer,
+            let name = repository.name,
+            let url = repository.pulls_url
+        else { return }
+        
+        let pullRequestsVC = PullRequestsViewController(name: name, pulls: url)
+    
+        
     }
 
 

@@ -10,7 +10,7 @@ import UIKit
 
 protocol RepositoriesPresenterOutput: AnyObject {
     func displayStartLoading()
-    func displayRepositories(viewModel: [RepositoriesModels.RepositoryView.ViewModel])
+    func displayRepositories(viewModel: [GithubModels.RepositoryView.ViewModel])
     func displayError(error: String)
 }
 
@@ -24,7 +24,7 @@ class RepositoriesPresenter: RepositoriesInteractorOutput {
     
     func didGetData(_ repositories: [Repository]) {
         let viewModel = repositories.map({
-            RepositoriesModels.RepositoryView.ViewModel(
+            GithubModels.RepositoryView.ViewModel(
                 name: $0.name,
                 description: $0.description,
                 stars: $0.stargazers_count,

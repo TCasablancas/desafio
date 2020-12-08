@@ -8,7 +8,7 @@
 
 import Foundation
 
-struct RepositoriesModels {
+struct GithubModels {
     struct RepositoryView {
         struct Request {
         }
@@ -20,6 +20,7 @@ struct RepositoriesModels {
             var forks: Int?
             var avatar: String?
             var developer: String?
+            var pulls_url: String?
         }
         
         struct ViewModel {
@@ -29,6 +30,7 @@ struct RepositoriesModels {
             let forks: Int?
             let avatar: String?
             let developer: String?
+            let pulls_url: String?
         }
     }
 }
