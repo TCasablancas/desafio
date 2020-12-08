@@ -9,14 +9,26 @@
 import Foundation
 import ObjectMapper
 
-struct Repository: Mappable {
+struct Repository: Mappable, Equatable {
     var name: String?
     var url: String?
     var description: String?
     var stargazers_count: Int?
     var forks_count: Int?
     var pulls_url: String?
-    var owner: [Owner]?
+    var owner: Owner?
+    var avatar: String? { owner?.avatar_url }
+    var developer: String? { owner?.login }
+    
+    init(name: String? = nil, url: String? = nil, description: String? = nil, stargazers_count: Int? = nil, forks_count: Int? = nil, pulls_url: String? = nil, owner: Owner? = nil) {
+        self.name = name
+        self.url = url
+        self.description = description
+        self.stargazers_count = stargazers_count
+        self.forks_count = forks_count
+        self.pulls_url = pulls_url
+        self.owner = owner
+    }
     
     init?(map: Map) {
         name = (try? map.value("name")) ?? ""
@@ -25,7 +37,7 @@ struct Repository: Mappable {
         stargazers_count = (try? map.value("stargazers_count")) ?? 0
         forks_count = (try? map.value("forks_count")) ?? 0
         pulls_url = (try? map.value("pulls_url")) ?? ""
-        owner = [(try? map.value("owner")) ?? Owner(map: map)!]
+        owner = (try? map.value("owner"))
     }
     
     mutating func mapping(map: Map) {
@@ -36,5 +48,9 @@ struct Repository: Mappable {
         forks_count <- map["forks_count"]
         pulls_url <- map["pulls_url"]
         owner <- map["owner"]
+    }
+
+    static func == (lhs: Repository, rhs: Repository) -> Bool {
+        lhs.url == rhs.url
     }
 }

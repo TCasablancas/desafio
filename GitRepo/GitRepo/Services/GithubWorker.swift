@@ -10,7 +10,11 @@ import Foundation
 import Alamofire
 import ObjectMapper
 
-class GithubWorker: Request {
+protocol RepoWorker {
+    func loadRepoList(page: Int, completion: @escaping (_ response: ResponseGithubRepo<GithubData>) -> Void)
+}
+
+class GithubWorker: Request, RepoWorker {
     //Get Repo List
     func loadRepoList(page: Int = 0, completion: @escaping (_ response: ResponseGithubRepo<GithubData>) -> Void) {
         let offset = page * GithubEndpoints.limit

@@ -10,215 +10,177 @@ import UIKit
 import SnapKit
 import FontAwesome_swift
 
-protocol RepositoriesCollectionViewCellDelegate {
-    func routeToRepository()
+protocol RepositoriesCollectionViewCellDelegate: AnyObject {
+    func routeToRepository(_ repository: ReposModels.RepositoryView.ViewModel)
 }
 
 class RepositoriesCollectionViewCell: UICollectionViewCell {
-    var delegate: RepositoriesCollectionViewCellDelegate?
-    var viewController: ReposViewController?
-    var presenter: ReposPresenter?
-    var router: GithubRouter?
-    var interactor: ReposInteractor?
-    var repository: [Repository] = []
-    var owner = [Owner]()
-    var datarepo: Repository?
-    var dataowner: Owner?
-
-    public override init(frame: CGRect) {
-        super.init(frame: frame)
-        setup()
-        configureWith(with: datarepo)
-    }
     
-    public required init?(coder aDecoder: NSCoder) {
-        super.init(coder: aDecoder)
-    }
-    
-    func configureWith(with repository: Repository?) {
-        self.datarepo = repository
-        guard
-            let forks = repository?.forks_count,
-            let stars = repository?.stargazers_count else { return }
-        
-        DispatchQueue.main.async {
-            self.repoTitle.text = repository?.name
-            self.repoDescription.text = repository?.description
-            self.numberForks.text = String(forks)
-            self.numberStars.text = String(stars)
-        }
-    }
-    
-    public lazy var container: UIView = {
+    private lazy var container: UIView = {
         let view = UIView()
         view.layer.borderWidth = 1
         view.layer.borderColor = Theme.default.border.cgColor
         return view
     }()
     
+    private lazy var mainStackView: UIStackView = {
+        let stack = UIStackView(arrangedSubviews: [stackView, stackNumbersContainer])
+        stack.axis = .vertical
+        stack.layer.cornerRadius = 10
+        return stack
+    }()
+    
     private lazy var stackView: UIStackView = {
-        let stack = UIStackView(arrangedSubviews: [stackViewText, stackViewOwner])
+        let stack = UIStackView(arrangedSubviews: [stackViewText, ownerView])
         stack.axis = .horizontal
         return stack
     }()
     
-    private lazy var stackViewOwner: UIStackView = {
-        let stack = UIStackView(arrangedSubviews: [imgContainer, username])
-        stack.axis = .vertical
-        return stack
-    }()
-    
     private lazy var stackViewText: UIStackView = {
-        let stack = UIStackView(arrangedSubviews: [repoTitle, repoDescription, stackNumbers])
+        let stack = UIStackView(arrangedSubviews: [repoTitle, repoDescription])
         stack.axis = .vertical
         return stack
     }()
     
     private lazy var stackNumbers: UIStackView = {
-        let stack = UIStackView(arrangedSubviews: [forksStack, starsStack])
+        let stack = UIStackView(arrangedSubviews: [forks, stars])
         stack.axis = .horizontal
         return stack
     }()
     
-    private lazy var forksStack: UIStackView = {
-        let stack = UIStackView(arrangedSubviews: [forkIcon, numberForks])
-        stack.axis = .horizontal
-        return stack
+    private lazy var stackNumbersContainer: UIView = {
+        let view = UIView()
+        view.layer.borderWidth = 1
+        view.layer.borderColor = Theme.default.description.cgColor
+        return view
     }()
     
-    private lazy var starsStack: UIStackView = {
-        let stack = UIStackView(arrangedSubviews: [starIcon, numberStars])
-        stack.axis = .horizontal
-        return stack
+    private lazy var forks: CountingItem = {
+        let view = CountingItem()
+        view.icon.image = UIImage.fontAwesomeIcon(
+            name: .codeBranch,
+            style: .solid,
+            textColor: Theme.default.description,
+            size: CGSize(width: 12, height: 12))
+        view.label.text = "forks"
+        return view
     }()
     
-    public lazy var repoTitle: UILabel = {
+    private lazy var stars: CountingItem = {
+        let view = CountingItem()
+        view.icon.image = UIImage.fontAwesomeIcon(
+            name: .star,
+            style: .solid,
+            textColor: Theme.default.description,
+            size: CGSize(width: 12, height: 12))
+        view.label.text = "branches"
+        return view
+    }()
+    
+    private lazy var repoTitle: UILabel = {
         let label = UILabel()
         label.text = "Test Title"
         label.font = UIFont(name: "Roboto-Medium", size: 22.0)
+        label.textColor = Theme.default.black
         return label
     }()
     
-    public lazy var repoDescription: UILabel = {
+    private lazy var repoDescription: UILabel = {
         let label = UILabel()
         label.text = "Lorem ipsum dolor sit amet..."
         label.numberOfLines = 0
-//        label.font = UIFont(name: Font.robotoThin.rawValue, size: 14.0)
         label.font = UIFont(name: "Roboto-Regular", size: 14.0)
         label.textColor = Theme.default.description
         return label
     }()
     
-    private lazy var imgContainer: UIView = {
-        let view = UIView()
-        view.layer.cornerRadius = 12
+    private lazy var ownerView: OwnerView = {
+        let view = OwnerView()
         return view
     }()
     
-    public lazy var userPic: UIImageView = {
-        let view = UIImageView()
-        view.backgroundColor = .red
-        return view
-    }()
     
-    public lazy var username: UILabel = {
-        let label = UILabel()
-        label.text = "Jon Doe"
-        label.textAlignment = .center
-        return label
-    }()
+    public weak var delegate: RepositoriesCollectionViewCellDelegate?
     
-    private lazy var forkIcon: UIImageView = {
-        let image = UIImageView()
-        image.image = UIImage.fontAwesomeIcon(
-            name: .codeBranch,
-            style: .solid,
-            textColor: Theme.default.purple,
-            size: CGSize(width: 20, height: 20))
-        return image
-    }()
+    private var repository: ReposModels.RepositoryView.ViewModel?
     
-    private lazy var starIcon: UIImageView = {
-        let image = UIImageView()
-        image.image = UIImage.fontAwesomeIcon(
-            name: .star,
-            style: .solid,
-            textColor: Theme.default.orange,
-            size: CGSize(width: 12, height: 12))
-        return image
-    }()
+    public override init(frame: CGRect) {
+        super.init(frame: frame)
+        setup()
+    }
     
-    public lazy var numberStars: UILabel = {
-        let label = UILabel()
-        label.text = "456"
-        label.textAlignment = .left
-        label.font = UIFont(name: Font.robotoMedium.rawValue, size: 14.0)
-        return label
-    }()
+    required init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
     
-    public lazy var numberForks: UILabel = {
-        let label = UILabel()
-        label.text = "359"
-        label.textAlignment = .left
-        label.font = UIFont(name: Font.robotoMedium.rawValue, size: 14.0)
-        return label
-    }()
+    public func configureWith(with repository: ReposModels.RepositoryView.ViewModel) {
+        self.repository = repository
+        
+        DispatchQueue.main.async {
+            self.repoTitle.text = repository.name
+            self.repoDescription.text = repository.description
+            self.forks.counter.text = repository.forks.flatMap(String.init)
+            self.stars.counter.text = repository.stars.flatMap(String.init)
+            self.ownerView.userPic = UIImageView(image: UIImage(named: "\(repository.avatar)"))
+            self.ownerView.username.text = repository.developer
+        }
+    }
 }
 
 extension RepositoriesCollectionViewCell {
     func enterOwnerRepository() {
-        delegate?.routeToRepository()
+        guard let repository = repository else { return }
+        
+        delegate?.routeToRepository(repository)
     }
 }
 
 extension RepositoriesCollectionViewCell: ViewCode {
     func viewHierarchy() {
         self.addSubview(container)
-        container.addSubview(stackView)
-        imgContainer.addSubview(userPic)
-        
+        container.addSubview(mainStackView)
+        stackNumbersContainer.addSubview(stackNumbers)
     }
     
     func setupConstraints() {
         container.snp.makeConstraints { make in
             make.width.equalToSuperview()
-            make.height.equalTo(140)
+            make.height.equalTo(160)
+        }
+        
+        mainStackView.snp.makeConstraints { make in
+            make.width.equalToSuperview()
+            make.height.equalToSuperview()
         }
         
         stackView.snp.makeConstraints{ make in
-            make.left.equalToSuperview().offset(10)
-            make.top.equalToSuperview().offset(10)
-            make.right.equalToSuperview().offset(-10)
-            make.bottom.equalToSuperview().offset(-10)
+            make.right.equalToSuperview().offset(-20)
+            make.top.left.equalToSuperview()
+            
         }
         
         stackViewText.snp.makeConstraints { make in
-            make.left.top.bottom.equalToSuperview()
-            make.right.equalTo(stackViewOwner.snp.left).offset(-10)
+            make.top.equalToSuperview().offset(10)
+            make.left.equalToSuperview().offset(20)
+            make.right.equalTo(ownerView.snp.left).offset(-10)
         }
         
-        stackViewOwner.snp.makeConstraints { make in
-            make.top.right.bottom.equalToSuperview()
-            make.width.equalTo(90)
+        ownerView.snp.makeConstraints { make in
+            make.top.bottom.equalToSuperview()
+            make.width.equalTo(80)
+            make.right.equalToSuperview().offset(-20)
+        }
+        
+        stackNumbersContainer.snp.makeConstraints { make in
+            make.width.equalToSuperview()
+            make.height.equalTo(40)
         }
         
         stackNumbers.snp.makeConstraints { make in
-            make.width.equalToSuperview()
+            make.left.equalToSuperview().offset(20)
+            make.right.equalToSuperview().offset(-20)
             make.height.equalTo(20)
-            make.top.equalTo(repoDescription.snp.bottom)
-            make.bottom.equalToSuperview()
-        }
-        
-        forksStack.snp.makeConstraints { make in
-            make.leading.equalToSuperview()
-            make.top.bottom.equalToSuperview()
-        }
-        
-        starsStack.snp.makeConstraints { make in
-            make.trailing.equalToSuperview()
-            make.top.bottom.equalToSuperview()
-            make.leading.equalTo(forksStack.snp.trailing)
-            make.width.equalTo(forksStack.snp.width)
+            make.centerY.equalToSuperview()
         }
         
         repoTitle.snp.makeConstraints { make in
@@ -229,43 +191,17 @@ extension RepositoriesCollectionViewCell: ViewCode {
         repoDescription.snp.makeConstraints { make in
             make.top.equalTo(repoTitle.snp.bottom)
             make.width.equalToSuperview()
-            make.height.equalTo(60)
+            make.height.equalTo(70)
         }
         
-        imgContainer.snp.makeConstraints{ make in
-            make.width.equalTo(60)
-            make.height.equalTo(60)
-            make.top.equalToSuperview().offset(10)
-            make.centerX.equalToSuperview()
-        }
-        
-        userPic.snp.makeConstraints { make in
-            make.width.equalToSuperview()
+        forks.snp.makeConstraints { make in
+            make.width.equalTo(stars.snp.width)
             make.height.equalToSuperview()
         }
         
-        username.snp.makeConstraints { make in
-            make.width.equalToSuperview()
-            make.top.equalTo(imgContainer.snp.bottom).offset(20)
-            make.height.equalTo(40)
-        }
-        
-        starIcon.snp.makeConstraints { make in
-            make.width.equalTo(20)
+        stars.snp.makeConstraints { make in
+            make.width.equalTo(forks.snp.width)
             make.height.equalToSuperview()
-        }
-        
-        forkIcon.snp.makeConstraints { make in
-            make.width.equalTo(20)
-            make.height.equalToSuperview()
-        }
-        
-        numberStars.snp.makeConstraints { make in
-            make.left.equalTo(starIcon.snp.right).offset(10)
-        }
-        
-        numberForks.snp.makeConstraints { make in
-            make.left.equalTo(forkIcon.snp.right).offset(10)
         }
     }
     

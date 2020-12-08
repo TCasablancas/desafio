@@ -11,7 +11,6 @@ import Foundation
 struct ReposModels {
     struct RepositoryView {
         struct Request {
-            var owner: [Owner]?
         }
         
         struct Response {
@@ -19,7 +18,8 @@ struct ReposModels {
             var description: String?
             var stars: Int?
             var forks: Int?
-            var owner: [Owner]?
+            var avatar: String?
+            var developer: String?
         }
         
         struct ViewModel {
@@ -27,6 +27,8 @@ struct ReposModels {
             let description: String?
             let stars: Int?
             let forks: Int?
+            let avatar: String?
+            let developer: String?
         }
     }
 }

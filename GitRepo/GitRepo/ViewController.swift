@@ -21,7 +21,7 @@ class ViewController: UIViewController {
 
         getFirstData()
         
-        self.view.layer.backgroundColor = UIColor.red.cgColor
+        self.view.layer.backgroundColor = UIColor.purple.cgColor
     }
     
     //MARK: - UIComponents

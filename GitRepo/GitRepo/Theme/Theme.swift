@@ -21,5 +21,6 @@ class Theme {
         static let facebook = UIColor(hexString: Constants.Colors.Hex.fbColor)
         static let border   = UIColor(hexString: Constants.Colors.Hex.lightGray)
         static let description = UIColor(hexString: Constants.Colors.Hex.heavyGray)
+        static let tag      = UIColor(hexString: Constants.Colors.Hex.denseGray)
     }
 }

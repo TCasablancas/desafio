@@ -20,6 +20,7 @@ struct Constants {
             static let fbColor          = "#3B5998"
             static let lightGray        = "#EAECEF"
             static let heavyGray        = "#586069"
+            static let denseGray        = "#6A737D"
         }
     }
 }

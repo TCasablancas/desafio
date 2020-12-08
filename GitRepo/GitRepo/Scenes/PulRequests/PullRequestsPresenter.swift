@@ -12,6 +12,6 @@ protocol PullRequestsPresentationLogic: class {
     
 }
 
-class PullRequestsPresenter: ReposPresenterPresentationLogic {
+class PullRequestsPresenter: PullRequestsPresentationLogic {
     weak var viewController: PullRequestsDisplayLogic?
 }

@@ -18,100 +18,44 @@ protocol ReposInteractorDataStore {
     var owner: [Owner] { get set }
 }
 
-class ReposInteractor: ReposInteractorBusinessLogic, ReposInteractorDataStore {
-    var repository: [Repository] = []
-    var owner: [Owner] = []
-    var data: GithubData?
-    var router: GithubRouter?
-    var worker: GithubWorker = GithubWorker()
-    var viewController: ReposViewController?
-    var collectionView: RepositoriesCollectionView?
-    var collectionViewCell: RepositoriesCollectionViewCell?
-    var presenter: ReposPresenter?
-    var datarepository: Repository?
-    var rowAtIndex = 10
-    
-    public var repoCount: Int?
+protocol ReposInteractorOutput {
+    func didStartLoading()
+    func didGetData(_ repositories: [Repository])
+    func didGetError(_ error: String)
 }
 
-//MARK: - Display Methods
+class ReposInteractor: ReposInteractorBusinessLogic {
+    
+    let output: ReposInteractorOutput
+    let worker: RepoWorker
 
-extension ReposInteractor {
+    init(output: ReposInteractorOutput, worker: RepoWorker) {
+        self.output = output
+        self.worker = worker
+    }
+    
+    // FIXME: Pass page number
     func getData() {
-        self.worker.loadRepoList() { (response) in
+        output.didStartLoading()
+        
+        self.worker.loadRepoList(page: 1) { [output] (response) in
             switch response {
             case .success(let model):
-                
-                let repositories = model.items
-                self.repository = repositories
-                self.displayRepoCells()
-                
-                self.repoCount = repositories.count
+                output.didGetData(model.items)
                 
             case .serverError(let error):
                 let errorData = "\(error.statusCode), -, \(error.msgError)"
+                output.didGetError(errorData)
                 print("Server error: \(errorData) \n")
                 break
             case .timeOut(let description):
                 print("Server error noConnection: \(description) \n")
+                output.didGetError("Timeout")
+                
             case .noConnection(let description):
+                output.didGetError("Offline")
                 print("Server error timeOut: \(description) \n")
             }
         }
-    }
-    
-    func search() {
-        self.worker.loadPullRequestList() { (response) in
-            switch response {
-            case .success(let model):
-                let name = model.title
-            case .serverError(let error):
-                let errorData = "\(error.statusCode), -, \(error.msgError)"
-                print("Server error: \(errorData) \n")
-                break
-            case .timeOut(let description):
-                print("Server error noConnection: \(description) \n")
-            case .noConnection(let description):
-                print("Server error timeOut: \(description) \n")
-            }
-        }
-    }
-}
-
-extension ReposInteractor {
-    func displayError() {
-        
-    }
-    
-    func reloadCell() {
-//        self.viewController?.collectionView.reload()
-        self.viewController?.activityIndicator.stopAnimating()
-    }
-    
-    func displayRepoCells() {
-        let indexPath = currentIndex
-        let repo = self.items(at: indexPath)
-        
-        self.presenter?.presentRepository(response: ReposModels.RepositoryView.Response(
-            name: repo?.name, description: repo?.description, stars: repo?.stargazers_count, forks: repo?.forks_count)
-        )
-    }
-}
-
-extension ReposInteractor: RepositoriesCollectionViewInteractorLogic {
-    var currentIndex: Int {
-        return rowAtIndex
-    }
-    
-    func itemsCount() -> Int {
-//        return self.repoCount ?? 1
-        return 10
-    }
-    
-    func items(at index: Int) -> Repository? {
-        if repository.count > index {
-            return repository[index]
-        }
-        return nil
     }
 }

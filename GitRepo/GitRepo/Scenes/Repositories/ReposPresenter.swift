@@ -8,23 +8,36 @@
 
 import UIKit
 
-protocol ReposPresenterPresentationLogic: class {
-    
+protocol ReposPresenterOutput: AnyObject {
+    func displayStartLoading()
+    func displayRepositories(viewModel: [ReposModels.RepositoryView.ViewModel])
+    func displayError(error: String)
 }
 
-class ReposPresenter: ReposPresenterPresentationLogic {
-    weak var viewController: ReposViewControllerDisplayLogic?
-    var reposCollectionView: RepositoriesCollectionView?
-
-    func presentRepository(response: ReposModels.RepositoryView.Response) {
-        let name = response.name
-        let description = response.description
-        let stars = response.stars
-        let forks = response.forks
+class ReposPresenter: ReposInteractorOutput {
+    weak var output: ReposPresenterOutput?
+    var viewController: RepositoriesViewController?
+    
+    func didStartLoading() {
+        output?.displayStartLoading()
+    }
+    
+    func didGetData(_ repositories: [Repository]) {
+        let viewModel = repositories.map({
+            ReposModels.RepositoryView.ViewModel(
+                name: $0.name,
+                description: $0.description,
+                stars: $0.stargazers_count,
+                forks: $0.forks_count,
+                avatar: $0.avatar,
+                developer: $0.developer)
+        })
         
-        let model = ReposModels.RepositoryView.ViewModel(name: name, description: description, stars: stars, forks: forks)
-        
-        viewController?.displayRepositories(viewModel: model)
+        output?.displayRepositories(viewModel: viewModel)
+    }
+    
+    func didGetError(_ error: String) {
+        output?.displayError(error: error)
     }
 }
 
