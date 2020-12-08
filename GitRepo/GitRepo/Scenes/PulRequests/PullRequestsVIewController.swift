@@ -17,7 +17,6 @@ class PullRequestsViewController: UIViewController {
     var interactor: PullRequestsInteractor?
     var worker: GithubWorker?
     
-    
     private lazy var container: UIScrollView = {
         let view = UIScrollView()
         return view
@@ -26,18 +25,37 @@ class PullRequestsViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         setup()
-        setupConfig()
+        
+        self.view.backgroundColor = Theme.default.gray
     }
     
-    private func setupConfig() {
-        let viewController = self
-        let presenter = PullRequestsPresenter()
-        let interactor = PullRequestsInteractor()
-        let worker = GithubWorker()
-        viewController.interactor = interactor
-        viewController.worker = worker
-        presenter.viewController = viewController
-        interactor.worker = worker
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        setupNavigationBar()
+    }
+    
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+    }
+}
+
+extension PullRequestsViewController {
+    private func setupNavigationBar() {
+        let appearance =  UINavigationBar.appearance()
+        let navigation = self.navigationController?.navigationBar
+        
+        title = "reponame"
+        navigation?.topItem?.backButtonTitle = ""
+        navigation?.tintColor = Theme.default.description
+        navigation?.backgroundColor = Theme.default.gray
+        navigation?.shadowImage = UIImage()
+        
+        let attrs = [
+            NSAttributedString.Key.foregroundColor: UIColor.red,
+            NSAttributedString.Key.font: UIFont(name: Font.poppinsBold.rawValue, size: 24)
+        ]
+
+        appearance.largeTitleTextAttributes = attrs
         
     }
 }

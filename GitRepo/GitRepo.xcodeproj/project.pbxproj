@@ -11,7 +11,7 @@
 		58DD9A78B08FD79EB99F806D /* libPods-GitRepo.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 750B74F52CD7F4C1F43E2F40 /* libPods-GitRepo.a */; };
 		B0371F81568290D8AB72DDBE /* libPods-GitRepoTests.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 49E8A46E4859138E76033C48 /* libPods-GitRepoTests.a */; };
 		EF3FB39D25717C3C00FB67C0 /* Header.swift in Sources */ = {isa = PBXBuildFile; fileRef = EF3FB39C25717C3C00FB67C0 /* Header.swift */; };
-		EF3FB39F2571ADA600FB67C0 /* ReposModels.swift in Sources */ = {isa = PBXBuildFile; fileRef = EF3FB39E2571ADA600FB67C0 /* ReposModels.swift */; };
+		EF3FB39F2571ADA600FB67C0 /* RepositoriesModels.swift in Sources */ = {isa = PBXBuildFile; fileRef = EF3FB39E2571ADA600FB67C0 /* RepositoriesModels.swift */; };
 		EF3FB3A12575408B00FB67C0 /* GithubRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = EF3FB3A02575408B00FB67C0 /* GithubRouter.swift */; };
 		EF5262D0257851A600A8EE2D /* CountingItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = EF5262CF257851A600A8EE2D /* CountingItem.swift */; };
 		EF52630B257FB03000A8EE2D /* RepositoriesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EF52630A257FB03000A8EE2D /* RepositoriesViewController.swift */; };
@@ -30,9 +30,8 @@
 		EF5824792570A42E00196889 /* Theme.swift in Sources */ = {isa = PBXBuildFile; fileRef = EF5824782570A42E00196889 /* Theme.swift */; };
 		EF58247B2570A46300196889 /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = EF58247A2570A46300196889 /* Constants.swift */; };
 		EF58247F2570A71500196889 /* RepositoriesCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = EF58247E2570A71500196889 /* RepositoriesCollectionViewCell.swift */; };
-		EF5824832570A7D400196889 /* ReposViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EF5824822570A7D400196889 /* ReposViewController.swift */; };
-		EF5824852570A94500196889 /* ReposPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = EF5824842570A94500196889 /* ReposPresenter.swift */; };
-		EF5824872570AA4B00196889 /* ReposInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = EF5824862570AA4B00196889 /* ReposInteractor.swift */; };
+		EF5824852570A94500196889 /* RepositoriesPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = EF5824842570A94500196889 /* RepositoriesPresenter.swift */; };
+		EF5824872570AA4B00196889 /* RepositoriesInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = EF5824862570AA4B00196889 /* RepositoriesInteractor.swift */; };
 		EF7D3F6625782C46004FBF40 /* OwnerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EF7D3F6525782C46004FBF40 /* OwnerView.swift */; };
 		EFBF8AC8257803A90027FBF5 /* Poppins-Bold.otf in Resources */ = {isa = PBXBuildFile; fileRef = EFBF8AC5257803A80027FBF5 /* Poppins-Bold.otf */; };
 		EFBF8AC9257803A90027FBF5 /* Poppins-ExtraLight.otf in Resources */ = {isa = PBXBuildFile; fileRef = EFBF8AC6257803A90027FBF5 /* Poppins-ExtraLight.otf */; };
@@ -85,7 +84,7 @@
 		750B74F52CD7F4C1F43E2F40 /* libPods-GitRepo.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-GitRepo.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		A88708E40B42AED9A62D36B4 /* Pods-GitRepo-GitRepoUITests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-GitRepo-GitRepoUITests.release.xcconfig"; path = "Target Support Files/Pods-GitRepo-GitRepoUITests/Pods-GitRepo-GitRepoUITests.release.xcconfig"; sourceTree = "<group>"; };
 		EF3FB39C25717C3C00FB67C0 /* Header.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Header.swift; sourceTree = "<group>"; };
-		EF3FB39E2571ADA600FB67C0 /* ReposModels.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReposModels.swift; sourceTree = "<group>"; };
+		EF3FB39E2571ADA600FB67C0 /* RepositoriesModels.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RepositoriesModels.swift; sourceTree = "<group>"; };
 		EF3FB3A02575408B00FB67C0 /* GithubRouter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GithubRouter.swift; sourceTree = "<group>"; };
 		EF5262CF257851A600A8EE2D /* CountingItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CountingItem.swift; sourceTree = "<group>"; };
 		EF52630A257FB03000A8EE2D /* RepositoriesViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RepositoriesViewController.swift; sourceTree = "<group>"; };
@@ -104,9 +103,8 @@
 		EF5824782570A42E00196889 /* Theme.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Theme.swift; sourceTree = "<group>"; };
 		EF58247A2570A46300196889 /* Constants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
 		EF58247E2570A71500196889 /* RepositoriesCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RepositoriesCollectionViewCell.swift; sourceTree = "<group>"; };
-		EF5824822570A7D400196889 /* ReposViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReposViewController.swift; sourceTree = "<group>"; };
-		EF5824842570A94500196889 /* ReposPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReposPresenter.swift; sourceTree = "<group>"; };
-		EF5824862570AA4B00196889 /* ReposInteractor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReposInteractor.swift; sourceTree = "<group>"; };
+		EF5824842570A94500196889 /* RepositoriesPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RepositoriesPresenter.swift; sourceTree = "<group>"; };
+		EF5824862570AA4B00196889 /* RepositoriesInteractor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RepositoriesInteractor.swift; sourceTree = "<group>"; };
 		EF7D3F6525782C46004FBF40 /* OwnerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OwnerView.swift; sourceTree = "<group>"; };
 		EFBF8AC5257803A80027FBF5 /* Poppins-Bold.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Poppins-Bold.otf"; sourceTree = "<group>"; };
 		EFBF8AC6257803A90027FBF5 /* Poppins-ExtraLight.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Poppins-ExtraLight.otf"; sourceTree = "<group>"; };
@@ -238,10 +236,9 @@
 			isa = PBXGroup;
 			children = (
 				EF52630A257FB03000A8EE2D /* RepositoriesViewController.swift */,
-				EF5824822570A7D400196889 /* ReposViewController.swift */,
-				EF5824842570A94500196889 /* ReposPresenter.swift */,
-				EF5824862570AA4B00196889 /* ReposInteractor.swift */,
-				EF3FB39E2571ADA600FB67C0 /* ReposModels.swift */,
+				EF5824842570A94500196889 /* RepositoriesPresenter.swift */,
+				EF5824862570AA4B00196889 /* RepositoriesInteractor.swift */,
+				EF3FB39E2571ADA600FB67C0 /* RepositoriesModels.swift */,
 			);
 			path = Repositories;
 			sourceTree = "<group>";
@@ -625,11 +622,10 @@
 				EFFB67DD25759CC60089321A /* Fonts.swift in Sources */,
 				EF5824752570A3E900196889 /* CollectionViewCell+Extension.swift in Sources */,
 				EF58245D25708A5300196889 /* GithubData.swift in Sources */,
-				EF5824852570A94500196889 /* ReposPresenter.swift in Sources */,
+				EF5824852570A94500196889 /* RepositoriesPresenter.swift in Sources */,
 				EF58246F2570A25E00196889 /* BaseView.swift in Sources */,
-				EF5824832570A7D400196889 /* ReposViewController.swift in Sources */,
 				EFFB67E525769B700089321A /* PullRequests.swift in Sources */,
-				EF3FB39F2571ADA600FB67C0 /* ReposModels.swift in Sources */,
+				EF3FB39F2571ADA600FB67C0 /* RepositoriesModels.swift in Sources */,
 				EFFB67E1257671D60089321A /* PullRequestsInteractor.swift in Sources */,
 				EFEE2C4B25707C1300703FA1 /* ViewController.swift in Sources */,
 				EF5824712570A29F00196889 /* ViewCode.swift in Sources */,
@@ -649,7 +645,7 @@
 				EF58247F2570A71500196889 /* RepositoriesCollectionViewCell.swift in Sources */,
 				EF5824662570934700196889 /* GithubWorker.swift in Sources */,
 				EF58246A2570A05800196889 /* GithubInfo.swift in Sources */,
-				EF5824872570AA4B00196889 /* ReposInteractor.swift in Sources */,
+				EF5824872570AA4B00196889 /* RepositoriesInteractor.swift in Sources */,
 				EF58245F25708B1B00196889 /* Repository.swift in Sources */,
 				EF52630B257FB03000A8EE2D /* RepositoriesViewController.swift in Sources */,
 				EF5824792570A42E00196889 /* Theme.swift in Sources */,

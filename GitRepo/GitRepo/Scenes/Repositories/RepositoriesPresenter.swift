@@ -8,14 +8,14 @@
 
 import UIKit
 
-protocol ReposPresenterOutput: AnyObject {
+protocol RepositoriesPresenterOutput: AnyObject {
     func displayStartLoading()
-    func displayRepositories(viewModel: [ReposModels.RepositoryView.ViewModel])
+    func displayRepositories(viewModel: [RepositoriesModels.RepositoryView.ViewModel])
     func displayError(error: String)
 }
 
-class ReposPresenter: ReposInteractorOutput {
-    weak var output: ReposPresenterOutput?
+class RepositoriesPresenter: RepositoriesInteractorOutput {
+    weak var output: RepositoriesPresenterOutput?
     var viewController: RepositoriesViewController?
     
     func didStartLoading() {
@@ -24,7 +24,7 @@ class ReposPresenter: ReposInteractorOutput {
     
     func didGetData(_ repositories: [Repository]) {
         let viewModel = repositories.map({
-            ReposModels.RepositoryView.ViewModel(
+            RepositoriesModels.RepositoryView.ViewModel(
                 name: $0.name,
                 description: $0.description,
                 stars: $0.stargazers_count,

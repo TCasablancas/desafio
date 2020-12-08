@@ -8,7 +8,7 @@
 
 import Foundation
 
-struct ReposModels {
+struct RepositoriesModels {
     struct RepositoryView {
         struct Request {
         }

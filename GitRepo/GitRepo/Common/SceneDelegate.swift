@@ -11,7 +11,8 @@ import UIKit
 class SceneDelegate: UIResponder, UIWindowSceneDelegate {
 
     var window: UIWindow?
-
+    var navigationController: UINavigationController?
+    var router: GithubRouter?
 
     func scene(_ scene: UIScene, willConnectTo session: UISceneSession, options connectionOptions: UIScene.ConnectionOptions) {
         // Use this method to optionally configure and attach the UIWindow `window` to the provided UIWindowScene `scene`.
@@ -19,12 +20,12 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         // This delegate does not imply the connecting scene or session are new (see `application:configurationForConnectingSceneSession` instead).
         guard let windowScene = (scene as? UIWindowScene) else { return }
         
-        
-        let presenter = ReposPresenter()
+        let presenter = RepositoriesPresenter()
         let interactor = ReposInteractor(output: presenter, worker: GithubWorker())
-        let rootVC = RepositoriesViewController(interactor: interactor)
+        let router = GithubRouter()
+        let rootVC = RepositoriesViewController(interactor: interactor, router: router)
         rootVC.didSelect = didSelectRepository
-        presenter.output = rootVC 
+        presenter.output = rootVC
         
         let navVC = UINavigationController(rootViewController: rootVC)
         
@@ -36,8 +37,10 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         self.window = window
     }
     
-    private func didSelectRepository(_ repository: ReposModels.RepositoryView.ViewModel) {
+    private func didSelectRepository(_ repository: RepositoriesModels.RepositoryView.ViewModel) {
         print("Show pull requestviews")
+//        let pullRequestsVC = PullRequestsViewController()
+//        self.navigationController?.pushViewController(pullRequestsVC, animated: true)
     }
 
 

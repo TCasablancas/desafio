@@ -8,28 +8,28 @@
 
 import UIKit
 
-protocol ReposInteractorBusinessLogic {
+protocol RepositoriesInteractorBusinessLogic {
     func getData()
 }
 
-protocol ReposInteractorDataStore {
+protocol RepositoriesInteractorDataStore {
     var repository: [Repository] { get set }
     var datarepository: Repository? { get set }
     var owner: [Owner] { get set }
 }
 
-protocol ReposInteractorOutput {
+protocol RepositoriesInteractorOutput {
     func didStartLoading()
     func didGetData(_ repositories: [Repository])
     func didGetError(_ error: String)
 }
 
-class ReposInteractor: ReposInteractorBusinessLogic {
+class ReposInteractor: RepositoriesInteractorBusinessLogic {
     
-    let output: ReposInteractorOutput
+    let output: RepositoriesInteractorOutput
     let worker: RepoWorker
 
-    init(output: ReposInteractorOutput, worker: RepoWorker) {
+    init(output: RepositoriesInteractorOutput, worker: RepoWorker) {
         self.output = output
         self.worker = worker
     }

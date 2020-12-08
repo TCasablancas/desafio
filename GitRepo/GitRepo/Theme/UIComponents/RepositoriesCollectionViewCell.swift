@@ -12,7 +12,7 @@ import Kingfisher
 import FontAwesome_swift
 
 protocol RepositoriesCollectionViewCellDelegate: AnyObject {
-    func routeToRepository(_ repository: ReposModels.RepositoryView.ViewModel)
+    func routeToRepository(_ repository: RepositoriesModels.RepositoryView.ViewModel)
 }
 
 class RepositoriesCollectionViewCell: UICollectionViewCell {
@@ -106,7 +106,7 @@ class RepositoriesCollectionViewCell: UICollectionViewCell {
     
     public weak var delegate: RepositoriesCollectionViewCellDelegate?
     
-    private var repository: ReposModels.RepositoryView.ViewModel?
+    private var repository: RepositoriesModels.RepositoryView.ViewModel?
     
     public override init(frame: CGRect) {
         super.init(frame: frame)
@@ -117,7 +117,7 @@ class RepositoriesCollectionViewCell: UICollectionViewCell {
         fatalError("init(coder:) has not been implemented")
     }
     
-    public func configureWith(with repository: ReposModels.RepositoryView.ViewModel) {
+    public func configureWith(with repository: RepositoriesModels.RepositoryView.ViewModel) {
         self.repository = repository
         
         DispatchQueue.main.async {

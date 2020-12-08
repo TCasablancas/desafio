@@ -50,14 +50,15 @@ class RepositoriesViewController: UICollectionViewController {
         return button
     }()
     
-    private let interactor: ReposInteractorBusinessLogic
+    private let router: GithubRouter?
+    private let interactor: RepositoriesInteractorBusinessLogic
+    public lazy var repositories: [RepositoriesModels.RepositoryView.ViewModel] = []
     
-    private lazy var repositories: [ReposModels.RepositoryView.ViewModel] = []
+    var didSelect: (RepositoriesModels.RepositoryView.ViewModel) -> Void = { _ in }
     
-    var didSelect: (ReposModels.RepositoryView.ViewModel) -> Void = { _ in }
-    
-    init(interactor: ReposInteractor) {
+    init(interactor: ReposInteractor, router: GithubRouter) {
         self.interactor = interactor
+        self.router = router
         
         let flow = UICollectionViewFlowLayout()
         flow.sectionInset = UIEdgeInsets(top: 0, left: 0, bottom: 0, right: 0)
@@ -90,15 +91,25 @@ class RepositoriesViewController: UICollectionViewController {
     }
 
     private func setupNavigationBar() {
-        self.navigationController?.navigationBar.topItem?.title = "gitrepo"
-        self.navigationController?.navigationBar.backgroundColor = Theme.default.gray
-        self.navigationController?.navigationBar.shadowImage = UIImage()
+        let navigation = self.navigationController?.navigationBar
+        self.navigationController?.navigationItem.largeTitleDisplayMode = .always
+        navigation?.prefersLargeTitles = true
+        navigation?.topItem?.title = "gitrepo"
+        navigation?.backgroundColor = Theme.default.gray
+        navigation?.shadowImage = UIImage()
         let attrs = [
             NSAttributedString.Key.foregroundColor: UIColor.red,
-            NSAttributedString.Key.font: UIFont(name: "Poppins-Bold", size: 24)!
+            NSAttributedString.Key.font: UIFont(name: Font.poppinsBold.rawValue, size: 24)
         ]
 
         UINavigationBar.appearance().titleTextAttributes = attrs
+        
+        for view in self.navigationController?.navigationBar.subviews ?? [] {
+             let subviews = view.subviews
+             if subviews.count > 0, let label = subviews[0] as? UILabel {
+                label.textColor = Theme.default.description
+             }
+        }
     }
     
     // MARK: UICollectionViewDataSource
@@ -120,26 +131,31 @@ class RepositoriesViewController: UICollectionViewController {
         
         return cell
     }
+    
+    override func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        let item = repositories[indexPath.item]
+        self.routeToRepository(item)
+        self.navigationController?.pushViewController(PullRequestsViewController(), animated: true)
+    }
 }
 
 // MARK: - RepositoriesCollectionViewCellDelegate Methods
 
 extension RepositoriesViewController: RepositoriesCollectionViewCellDelegate {
     
-    func routeToRepository(_ repository: ReposModels.RepositoryView.ViewModel) {
+    func routeToRepository(_ repository: RepositoriesModels.RepositoryView.ViewModel) {
         didSelect(repository)
     }
 }
 
 // MARK: - ReposPresenterOutput Methods
 
-extension RepositoriesViewController: ReposPresenterOutput {
-    
+extension RepositoriesViewController: RepositoriesPresenterOutput {
     func displayStartLoading() {
-        print("show activity indicator")
+        self.activityIndicator.startAnimating()
     }
     
-    func displayRepositories(viewModel: [ReposModels.RepositoryView.ViewModel]) {
+    func displayRepositories(viewModel: [RepositoriesModels.RepositoryView.ViewModel]) {
         repositories = viewModel
         collectionView.reloadData()
     }
@@ -152,7 +168,6 @@ extension RepositoriesViewController: ReposPresenterOutput {
 // MARK: - UICollectionViewDelegateFlowLayout Methods
 
 extension RepositoriesViewController: UICollectionViewDelegateFlowLayout {
-    
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
         return CGSize(width: collectionView.bounds.width, height: 160)
     }
