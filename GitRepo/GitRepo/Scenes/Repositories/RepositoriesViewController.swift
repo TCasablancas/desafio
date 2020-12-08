@@ -8,6 +8,7 @@
 
 import UIKit
 import SnapKit
+import FontAwesome_swift
 
 private let reuseIdentifier = "RepositoriesCollectionViewCell"
 
@@ -25,7 +26,7 @@ class RepositoriesViewController: UICollectionViewController {
     }()
     
     lazy var stackView: UIStackView = {
-        let stack = UIStackView(arrangedSubviews: [header, viewCollection])
+        let stack = UIStackView(arrangedSubviews: [header, collectionView])
         stack.axis = .vertical
         return stack
     }()
@@ -39,9 +40,14 @@ class RepositoriesViewController: UICollectionViewController {
         return activity
     }()
     
-    lazy var viewCollection: UICollectionView = {
-        let view = UICollectionView()
-        return view
+    lazy var btnMenu: UIButton = {
+        let button = UIButton()
+        button.imageView?.image = UIImage.fontAwesomeIcon(
+            name: .star,
+            style: .solid,
+            textColor: Theme.default.description,
+            size: CGSize(width: 12, height: 12))
+        return button
     }()
     
     private let interactor: ReposInteractorBusinessLogic
@@ -74,15 +80,27 @@ class RepositoriesViewController: UICollectionViewController {
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        self.tabBarController?.navigationItem.title = "SHOOT DAYS"
+        setupNavigationBar()
     }
-
+    
     private func configureCollectionView() {
-        viewCollection.register(RepositoriesCollectionViewCell.self, forCellWithReuseIdentifier: reuseIdentifier)
-        viewCollection.delegate = self
-        viewCollection.backgroundColor = Theme.default.gray
+        collectionView.register(RepositoriesCollectionViewCell.self, forCellWithReuseIdentifier: reuseIdentifier)
+        collectionView.delegate = self
+        collectionView.backgroundColor = Theme.default.gray
     }
 
+    private func setupNavigationBar() {
+        self.navigationController?.navigationBar.topItem?.title = "gitrepo"
+        self.navigationController?.navigationBar.backgroundColor = Theme.default.gray
+        self.navigationController?.navigationBar.shadowImage = UIImage()
+        let attrs = [
+            NSAttributedString.Key.foregroundColor: UIColor.red,
+            NSAttributedString.Key.font: UIFont(name: "Poppins-Bold", size: 24)!
+        ]
+
+        UINavigationBar.appearance().titleTextAttributes = attrs
+    }
+    
     // MARK: UICollectionViewDataSource
 
     override func numberOfSections(in collectionView: UICollectionView) -> Int {
@@ -136,7 +154,7 @@ extension RepositoriesViewController: ReposPresenterOutput {
 extension RepositoriesViewController: UICollectionViewDelegateFlowLayout {
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-        return CGSize(width: collectionView.bounds.width, height: 159)
+        return CGSize(width: collectionView.bounds.width, height: 160)
     }
 }
 
@@ -160,17 +178,13 @@ extension RepositoriesViewController: ViewCode {
             }
             make.left.equalToSuperview().offset(20)
             make.right.equalToSuperview().offset(-20)
-            make.bottom.equalToSuperview()
+            make.bottom.equalToSuperview().offset(-100)
         }
         
         header.snp.makeConstraints { make in
             make.width.equalToSuperview()
             make.top.equalToSuperview()
             make.height.equalTo(100)
-        }
-        
-        viewCollection.snp.makeConstraints { make in
-            make.left.equalToSuperview().offset(40)
         }
     }
 }

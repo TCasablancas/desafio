@@ -29,7 +29,8 @@ class OwnerView: UIView {
     public lazy var userPic: UIImageView = {
         let view = UIImageView()
         view.backgroundColor = Theme.default.gray
-        view.layer.cornerRadius = 25
+        view.layer.cornerRadius = 30
+        view.layer.masksToBounds = true
         return view
     }()
     
@@ -38,7 +39,8 @@ class OwnerView: UIView {
         label.text = "tcasablancas"
         label.textAlignment = .center
         label.numberOfLines = 0
-        label.font = UIFont(name: "Roboto-Thin", size: 13.0)
+        label.font = UIFont(name: "Roboto-Regular", size: 13.0)
+        label.textColor = Theme.default.description
         return label
     }()
     
@@ -61,7 +63,7 @@ extension OwnerView: ViewCode {
     
     func setupConstraints() {
         container.snp.makeConstraints { make in
-            make.width.equalTo(100)
+            make.width.equalTo(90)
             make.height.equalToSuperview()
         }
         
@@ -73,9 +75,9 @@ extension OwnerView: ViewCode {
         
         imgContainer.snp.makeConstraints { make in
             make.width.equalToSuperview()
-            make.height.equalTo(110)
+            make.height.equalTo(60)
             make.centerX.equalToSuperview()
-            make.top.equalToSuperview()
+            make.top.equalToSuperview().offset(10)
         }
         
         userPic.snp.makeConstraints { make in

@@ -8,6 +8,7 @@
 
 import UIKit
 import SnapKit
+import Kingfisher
 import FontAwesome_swift
 
 protocol RepositoriesCollectionViewCellDelegate: AnyObject {
@@ -20,13 +21,15 @@ class RepositoriesCollectionViewCell: UICollectionViewCell {
         let view = UIView()
         view.layer.borderWidth = 1
         view.layer.borderColor = Theme.default.border.cgColor
+        view.layer.cornerRadius = 10
+        view.layer.masksToBounds = true
+        view.backgroundColor = Theme.default.bgCell
         return view
     }()
     
     private lazy var mainStackView: UIStackView = {
-        let stack = UIStackView(arrangedSubviews: [stackView, stackNumbersContainer])
+        let stack = UIStackView(arrangedSubviews: [stackView, containerStackNumbers])
         stack.axis = .vertical
-        stack.layer.cornerRadius = 10
         return stack
     }()
     
@@ -48,10 +51,11 @@ class RepositoriesCollectionViewCell: UICollectionViewCell {
         return stack
     }()
     
-    private lazy var stackNumbersContainer: UIView = {
+    private lazy var containerStackNumbers: UIView = {
         let view = UIView()
         view.layer.borderWidth = 1
-        view.layer.borderColor = Theme.default.description.cgColor
+        view.layer.borderColor = Theme.default.border.cgColor
+        view.backgroundColor = Theme.default.white
         return view
     }()
     
@@ -62,7 +66,7 @@ class RepositoriesCollectionViewCell: UICollectionViewCell {
             style: .solid,
             textColor: Theme.default.description,
             size: CGSize(width: 12, height: 12))
-        view.label.text = "forks"
+        view.label.text = "Forks"
         return view
     }()
     
@@ -73,7 +77,7 @@ class RepositoriesCollectionViewCell: UICollectionViewCell {
             style: .solid,
             textColor: Theme.default.description,
             size: CGSize(width: 12, height: 12))
-        view.label.text = "branches"
+        view.label.text = "Stargazers"
         return view
     }()
     
@@ -121,8 +125,15 @@ class RepositoriesCollectionViewCell: UICollectionViewCell {
             self.repoDescription.text = repository.description
             self.forks.counter.text = repository.forks.flatMap(String.init)
             self.stars.counter.text = repository.stars.flatMap(String.init)
-            self.ownerView.userPic = UIImageView(image: UIImage(named: "\(repository.avatar)"))
+            self.ownerView.userPic.image = UIImage(named: "\(repository.avatar)")
             self.ownerView.username.text = repository.developer
+            
+            if let url = URL(string: repository.avatar ?? "") {
+                self.ownerView.userPic.kf.indicatorType = .activity
+                self.ownerView.userPic.kf.setImage(with: url)
+            } else {
+                self.ownerView.userPic.image = UIImage(named: "")
+            }
         }
     }
 }
@@ -139,13 +150,14 @@ extension RepositoriesCollectionViewCell: ViewCode {
     func viewHierarchy() {
         self.addSubview(container)
         container.addSubview(mainStackView)
-        stackNumbersContainer.addSubview(stackNumbers)
+        containerStackNumbers.addSubview(stackNumbers)
     }
     
     func setupConstraints() {
         container.snp.makeConstraints { make in
-            make.width.equalToSuperview()
-            make.height.equalTo(160)
+            make.left.equalToSuperview().offset(10)
+            make.right.equalToSuperview().offset(-10)
+            make.bottom.equalTo(10)
         }
         
         mainStackView.snp.makeConstraints { make in
@@ -156,7 +168,7 @@ extension RepositoriesCollectionViewCell: ViewCode {
         stackView.snp.makeConstraints{ make in
             make.right.equalToSuperview().offset(-20)
             make.top.left.equalToSuperview()
-            
+            make.bottom.equalTo(stackNumbers.snp.top)
         }
         
         stackViewText.snp.makeConstraints { make in
@@ -168,19 +180,22 @@ extension RepositoriesCollectionViewCell: ViewCode {
         ownerView.snp.makeConstraints { make in
             make.top.bottom.equalToSuperview()
             make.width.equalTo(80)
+            make.height.equalTo(100)
             make.right.equalToSuperview().offset(-20)
         }
         
-        stackNumbersContainer.snp.makeConstraints { make in
+        containerStackNumbers.snp.makeConstraints { make in
             make.width.equalToSuperview()
             make.height.equalTo(40)
+            make.bottom.equalToSuperview()
+            make.top.equalTo(stackView.snp.bottom)
         }
         
         stackNumbers.snp.makeConstraints { make in
+            make.top.equalTo(stackView.snp.bottom)
             make.left.equalToSuperview().offset(20)
             make.right.equalToSuperview().offset(-20)
-            make.height.equalTo(20)
-            make.centerY.equalToSuperview()
+            make.bottom.equalToSuperview().offset(-60)
         }
         
         repoTitle.snp.makeConstraints { make in
@@ -196,12 +211,14 @@ extension RepositoriesCollectionViewCell: ViewCode {
         
         forks.snp.makeConstraints { make in
             make.width.equalTo(stars.snp.width)
-            make.height.equalToSuperview()
+            make.top.equalToSuperview().offset(10)
+            make.height.equalTo(20)
         }
         
         stars.snp.makeConstraints { make in
             make.width.equalTo(forks.snp.width)
-            make.height.equalToSuperview()
+            make.top.equalToSuperview().offset(10)
+            make.height.equalTo(20)
         }
     }
     

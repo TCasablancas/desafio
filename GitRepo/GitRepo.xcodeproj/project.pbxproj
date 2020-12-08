@@ -29,7 +29,6 @@
 		EF5824772570A40D00196889 /* Color+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = EF5824762570A40D00196889 /* Color+Extension.swift */; };
 		EF5824792570A42E00196889 /* Theme.swift in Sources */ = {isa = PBXBuildFile; fileRef = EF5824782570A42E00196889 /* Theme.swift */; };
 		EF58247B2570A46300196889 /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = EF58247A2570A46300196889 /* Constants.swift */; };
-		EF58247D2570A5EF00196889 /* RepositoriesCollectionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EF58247C2570A5EF00196889 /* RepositoriesCollectionView.swift */; };
 		EF58247F2570A71500196889 /* RepositoriesCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = EF58247E2570A71500196889 /* RepositoriesCollectionViewCell.swift */; };
 		EF5824832570A7D400196889 /* ReposViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EF5824822570A7D400196889 /* ReposViewController.swift */; };
 		EF5824852570A94500196889 /* ReposPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = EF5824842570A94500196889 /* ReposPresenter.swift */; };
@@ -104,7 +103,6 @@
 		EF5824762570A40D00196889 /* Color+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Color+Extension.swift"; sourceTree = "<group>"; };
 		EF5824782570A42E00196889 /* Theme.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Theme.swift; sourceTree = "<group>"; };
 		EF58247A2570A46300196889 /* Constants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
-		EF58247C2570A5EF00196889 /* RepositoriesCollectionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RepositoriesCollectionView.swift; sourceTree = "<group>"; };
 		EF58247E2570A71500196889 /* RepositoriesCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RepositoriesCollectionViewCell.swift; sourceTree = "<group>"; };
 		EF5824822570A7D400196889 /* ReposViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReposViewController.swift; sourceTree = "<group>"; };
 		EF5824842570A94500196889 /* ReposPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReposPresenter.swift; sourceTree = "<group>"; };
@@ -208,7 +206,6 @@
 				EF58246E2570A25E00196889 /* BaseView.swift */,
 				EF3FB39C25717C3C00FB67C0 /* Header.swift */,
 				EF7D3F6525782C46004FBF40 /* OwnerView.swift */,
-				EF58247C2570A5EF00196889 /* RepositoriesCollectionView.swift */,
 				EF58247E2570A71500196889 /* RepositoriesCollectionViewCell.swift */,
 				EF5262CF257851A600A8EE2D /* CountingItem.swift */,
 			);
@@ -643,7 +640,6 @@
 				EFFB67E3257672EA0089321A /* PullRequestsPresenter.swift in Sources */,
 				EF58246C2570A0B900196889 /* Response.swift in Sources */,
 				EFEE2C7E25707F4B00703FA1 /* GithubEndpoints.swift in Sources */,
-				EF58247D2570A5EF00196889 /* RepositoriesCollectionView.swift in Sources */,
 				EFEE2C4725707C1300703FA1 /* AppDelegate.swift in Sources */,
 				EFEE2C4925707C1300703FA1 /* SceneDelegate.swift in Sources */,
 				EF3FB3A12575408B00FB67C0 /* GithubRouter.swift in Sources */,

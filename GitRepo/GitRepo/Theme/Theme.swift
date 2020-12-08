@@ -22,5 +22,6 @@ class Theme {
         static let border   = UIColor(hexString: Constants.Colors.Hex.lightGray)
         static let description = UIColor(hexString: Constants.Colors.Hex.heavyGray)
         static let tag      = UIColor(hexString: Constants.Colors.Hex.denseGray)
+        static let bgCell      = UIColor(hexString: Constants.Colors.Hex.cellGray)
     }
 }
