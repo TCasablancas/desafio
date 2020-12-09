@@ -14,12 +14,8 @@ protocol PullRequestsDisplayLogic: class {
 }
 
 class PullRequestsViewController: UIViewController {
-    private let interactor: PullRequestsInteractorBusinessLogic?
-    var worker: GithubWorker?
-    var repoVC: RepositoriesViewController?
-    
-    var name: String?
-    var pulls: String?
+    private let interactor: PullRequestsInteractorBusinessLogic
+    public lazy var pullRequests: [GithubModels.PullRequestView.ViewModel] = []
     
     private lazy var container: UIScrollView = {
         let view = UIScrollView()
@@ -31,7 +27,7 @@ class PullRequestsViewController: UIViewController {
         setup()
         
         self.view.backgroundColor = Theme.default.gray
-        print(self.name)
+        interactor.getPullRequests()
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -43,9 +39,8 @@ class PullRequestsViewController: UIViewController {
         super.viewDidAppear(animated)
     }
     
-    init(name: String, pulls: String) {
-        self.name = name
-        self.pulls = pulls
+    init(interactor: PullRequestsInteractor) {
+        self.interactor = interactor
         super.init(nibName: nil, bundle: nil)
     }
     
@@ -58,7 +53,7 @@ extension PullRequestsViewController {
     private func setupNavigationBar() {
         let navigation = self.navigationController?.navigationBar
         
-        title = self.name
+        title = "repotitle"
         navigation?.topItem?.backButtonTitle = ""
         navigation?.tintColor = Theme.default.description
     }

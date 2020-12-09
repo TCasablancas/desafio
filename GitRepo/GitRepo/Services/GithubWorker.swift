@@ -10,12 +10,12 @@ import Foundation
 import Alamofire
 import ObjectMapper
 
-protocol RepoWorker {
+protocol GithubWorkerDelegate {
     func loadRepoList(page: Int, completion: @escaping (_ response: ResponseGithubRepo<GithubData>) -> Void)
     func loadPullRequestList(completion: @escaping (_ response: ResponseGithubRepo<PullRequests>) -> Void)
 }
 
-class GithubWorker: Request, RepoWorker {
+class GithubWorker: Request, GithubWorkerDelegate {
     //Get Repo List
     func loadRepoList(page: Int = 0, completion: @escaping (_ response: ResponseGithubRepo<GithubData>) -> Void) {
         let offset = page * 10
@@ -54,11 +54,11 @@ class GithubWorker: Request, RepoWorker {
             let statusCode = data.response?.statusCode
             switch data.result {
             case .success(let value):
-                let resultValue = value as? [String:Any] ?? [:]
+                guard let resultValue = value as? [String:Any] else { return }
 
                 if statusCode == 200 {
                     guard let model = Mapper<PullRequests>().map(JSON: resultValue) else { return }
-                    print(completion(.success(model: model)))
+                    completion(.success(model: model))
                 }
                 
             case .failure(let error):

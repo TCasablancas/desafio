@@ -81,20 +81,13 @@ class RepositoriesCollectionViewCell: UICollectionViewCell {
         return view
     }()
     
-    private lazy var repoTitle: UILabel = {
-        let label = UILabel()
-        label.text = "Test Title"
-        label.font = UIFont(name: "Roboto-Medium", size: 22.0)
-        label.textColor = Theme.default.black
+    private lazy var repoTitle: TitleView = {
+        let label = TitleView()
         return label
     }()
     
-    private lazy var repoDescription: UILabel = {
-        let label = UILabel()
-        label.text = "Lorem ipsum dolor sit amet..."
-        label.numberOfLines = 0
-        label.font = UIFont(name: "Roboto-Regular", size: 14.0)
-        label.textColor = Theme.default.description
+    private lazy var repoDescription: DescriptionView = {
+        let label = DescriptionView()
         return label
     }()
     
@@ -121,8 +114,8 @@ class RepositoriesCollectionViewCell: UICollectionViewCell {
         self.repository = repository
         
         DispatchQueue.main.async {
-            self.repoTitle.text = repository.name
-            self.repoDescription.text = repository.description
+            self.repoTitle.title.text = repository.name
+            self.repoDescription.thisDescription.text = repository.description
             self.forks.counter.text = repository.forks.flatMap(String.init)
             self.stars.counter.text = repository.stars.flatMap(String.init)
             self.ownerView.userPic.image = UIImage(named: "\(repository.avatar)")

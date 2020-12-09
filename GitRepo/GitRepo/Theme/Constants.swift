@@ -22,6 +22,7 @@ struct Constants {
             static let heavyGray        = "#586069"
             static let denseGray        = "#6A737D"
             static let cellGray         = "#FAFBFC"
+            static let link             = "#0366D6"
         }
     }
 }

@@ -30,7 +30,8 @@ class RepositoriesPresenter: RepositoriesInteractorOutput {
                 stars: $0.stargazers_count,
                 forks: $0.forks_count,
                 avatar: $0.avatar,
-                developer: $0.developer)
+                developer: $0.developer,
+                pulls_url: $0.pulls_url)
         })
         
         output?.displayRepositories(viewModel: viewModel)

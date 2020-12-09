@@ -12,7 +12,6 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
 
     var window: UIWindow?
     var navigationController: UINavigationController?
-    var router: GithubRouter?
 
     func scene(_ scene: UIScene, willConnectTo session: UISceneSession, options connectionOptions: UIScene.ConnectionOptions) {
         // Use this method to optionally configure and attach the UIWindow `window` to the provided UIWindowScene `scene`.
@@ -59,10 +58,11 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
             let name = repository.name,
             let url = repository.pulls_url
         else { return }
-        
-        let pullRequestsVC = PullRequestsViewController(name: name, pulls: url)
-    
-        
+
+        let presenter = PullRequestsPresenter()
+        let interactor = PullRequestsInteractor(output: presenter, worker: GithubWorker())
+        let pullRequestsVC = PullRequestsViewController(interactor: interactor)
+//        presenter.output = pullRequestsVC
     }
 
 

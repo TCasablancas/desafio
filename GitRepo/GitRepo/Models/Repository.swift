@@ -17,9 +17,12 @@ struct Repository: Mappable, Equatable {
     var forks_count: Int?
     var pulls_url: String?
     var owner: Owner?
+    
+    //MARK: - Retrieve Owner Data
     var avatar: String? { owner?.avatar_url }
     var developer: String? { owner?.login }
     
+    //MARK: - Initializer for Tests
     init(name: String? = nil, url: String? = nil, description: String? = nil, stargazers_count: Int? = nil, forks_count: Int? = nil, pulls_url: String? = nil, owner: Owner? = nil) {
         self.name = name
         self.url = url
@@ -50,6 +53,7 @@ struct Repository: Mappable, Equatable {
         owner <- map["owner"]
     }
 
+    //MARK: - Test Data Comparative
     static func == (lhs: Repository, rhs: Repository) -> Bool {
         lhs.url == rhs.url
     }

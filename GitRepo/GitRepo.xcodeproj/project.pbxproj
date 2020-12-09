@@ -10,9 +10,7 @@
 		2B4DBDC384B0B51DB7D07496 /* libPods-GitRepo-GitRepoUITests.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 7063549139DA592F8C0E56A8 /* libPods-GitRepo-GitRepoUITests.a */; };
 		58DD9A78B08FD79EB99F806D /* libPods-GitRepo.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 750B74F52CD7F4C1F43E2F40 /* libPods-GitRepo.a */; };
 		B0371F81568290D8AB72DDBE /* libPods-GitRepoTests.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 49E8A46E4859138E76033C48 /* libPods-GitRepoTests.a */; };
-		EF3FB39D25717C3C00FB67C0 /* Header.swift in Sources */ = {isa = PBXBuildFile; fileRef = EF3FB39C25717C3C00FB67C0 /* Header.swift */; };
 		EF3FB39F2571ADA600FB67C0 /* GithubModels.swift in Sources */ = {isa = PBXBuildFile; fileRef = EF3FB39E2571ADA600FB67C0 /* GithubModels.swift */; };
-		EF3FB3A12575408B00FB67C0 /* GithubRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = EF3FB3A02575408B00FB67C0 /* GithubRouter.swift */; };
 		EF5262D0257851A600A8EE2D /* CountingItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = EF5262CF257851A600A8EE2D /* CountingItem.swift */; };
 		EF52630B257FB03000A8EE2D /* RepositoriesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EF52630A257FB03000A8EE2D /* RepositoriesViewController.swift */; };
 		EF526319257FBF6A00A8EE2D /* ReposInteractorTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = EF526318257FBF6A00A8EE2D /* ReposInteractorTests.swift */; };
@@ -55,6 +53,10 @@
 		EFFB67EB2576D1B90089321A /* Roboto-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = EFFB67E82576D1B90089321A /* Roboto-Regular.ttf */; };
 		EFFB67EC2576D1B90089321A /* Roboto-Thin.ttf in Resources */ = {isa = PBXBuildFile; fileRef = EFFB67E92576D1B90089321A /* Roboto-Thin.ttf */; };
 		EFFB67ED2576D1B90089321A /* Roboto-Medium.ttf in Resources */ = {isa = PBXBuildFile; fileRef = EFFB67EA2576D1B90089321A /* Roboto-Medium.ttf */; };
+		EFFF95E125804FD400C52A3D /* PullRequestsVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = EFFF95E025804FD400C52A3D /* PullRequestsVC.swift */; };
+		EFFF95E62580506000C52A3D /* PullRequestsCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = EFFF95E52580506000C52A3D /* PullRequestsCollectionViewCell.swift */; };
+		EFFF95EE2580574D00C52A3D /* DescriptionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EFFF95ED2580574D00C52A3D /* DescriptionView.swift */; };
+		EFFF95F32580592F00C52A3D /* TitleView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EFFF95F22580592F00C52A3D /* TitleView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -83,9 +85,7 @@
 		7063549139DA592F8C0E56A8 /* libPods-GitRepo-GitRepoUITests.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-GitRepo-GitRepoUITests.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		750B74F52CD7F4C1F43E2F40 /* libPods-GitRepo.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-GitRepo.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		A88708E40B42AED9A62D36B4 /* Pods-GitRepo-GitRepoUITests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-GitRepo-GitRepoUITests.release.xcconfig"; path = "Target Support Files/Pods-GitRepo-GitRepoUITests/Pods-GitRepo-GitRepoUITests.release.xcconfig"; sourceTree = "<group>"; };
-		EF3FB39C25717C3C00FB67C0 /* Header.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Header.swift; sourceTree = "<group>"; };
 		EF3FB39E2571ADA600FB67C0 /* GithubModels.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GithubModels.swift; sourceTree = "<group>"; };
-		EF3FB3A02575408B00FB67C0 /* GithubRouter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GithubRouter.swift; sourceTree = "<group>"; };
 		EF5262CF257851A600A8EE2D /* CountingItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CountingItem.swift; sourceTree = "<group>"; };
 		EF52630A257FB03000A8EE2D /* RepositoriesViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RepositoriesViewController.swift; sourceTree = "<group>"; };
 		EF526318257FBF6A00A8EE2D /* ReposInteractorTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReposInteractorTests.swift; sourceTree = "<group>"; };
@@ -134,6 +134,10 @@
 		EFFB67E82576D1B90089321A /* Roboto-Regular.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; name = "Roboto-Regular.ttf"; path = "GitRepo/Assets/Fonts/Roboto-Regular.ttf"; sourceTree = SOURCE_ROOT; };
 		EFFB67E92576D1B90089321A /* Roboto-Thin.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; name = "Roboto-Thin.ttf"; path = "GitRepo/Assets/Fonts/Roboto-Thin.ttf"; sourceTree = SOURCE_ROOT; };
 		EFFB67EA2576D1B90089321A /* Roboto-Medium.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; name = "Roboto-Medium.ttf"; path = "GitRepo/Assets/Fonts/Roboto-Medium.ttf"; sourceTree = SOURCE_ROOT; };
+		EFFF95E025804FD400C52A3D /* PullRequestsVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PullRequestsVC.swift; sourceTree = "<group>"; };
+		EFFF95E52580506000C52A3D /* PullRequestsCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PullRequestsCollectionViewCell.swift; sourceTree = "<group>"; };
+		EFFF95ED2580574D00C52A3D /* DescriptionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DescriptionView.swift; sourceTree = "<group>"; };
+		EFFF95F22580592F00C52A3D /* TitleView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TitleView.swift; sourceTree = "<group>"; };
 		FE371E2DA87CCB4094388122 /* Pods-GitRepo-GitRepoUITests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-GitRepo-GitRepoUITests.debug.xcconfig"; path = "Target Support Files/Pods-GitRepo-GitRepoUITests/Pods-GitRepo-GitRepoUITests.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -202,10 +206,10 @@
 			isa = PBXGroup;
 			children = (
 				EF58246E2570A25E00196889 /* BaseView.swift */,
-				EF3FB39C25717C3C00FB67C0 /* Header.swift */,
 				EF7D3F6525782C46004FBF40 /* OwnerView.swift */,
-				EF58247E2570A71500196889 /* RepositoriesCollectionViewCell.swift */,
 				EF5262CF257851A600A8EE2D /* CountingItem.swift */,
+				EFFF95ED2580574D00C52A3D /* DescriptionView.swift */,
+				EFFF95F22580592F00C52A3D /* TitleView.swift */,
 			);
 			path = UIComponents;
 			sourceTree = "<group>";
@@ -238,6 +242,7 @@
 				EF52630A257FB03000A8EE2D /* RepositoriesViewController.swift */,
 				EF5824842570A94500196889 /* RepositoriesPresenter.swift */,
 				EF5824862570AA4B00196889 /* RepositoriesInteractor.swift */,
+				EF58247E2570A71500196889 /* RepositoriesCollectionViewCell.swift */,
 			);
 			path = Repositories;
 			sourceTree = "<group>";
@@ -248,6 +253,8 @@
 				EFFB67DE2575A9590089321A /* PullRequestsViewController.swift */,
 				EFFB67E0257671D60089321A /* PullRequestsInteractor.swift */,
 				EFFB67E2257672EA0089321A /* PullRequestsPresenter.swift */,
+				EFFF95E025804FD400C52A3D /* PullRequestsVC.swift */,
+				EFFF95E52580506000C52A3D /* PullRequestsCollectionViewCell.swift */,
 			);
 			path = PulRequests;
 			sourceTree = "<group>";
@@ -355,7 +362,6 @@
 			children = (
 				EF582464257092E200196889 /* DataReturn */,
 				EFEE2C7D25707F4B00703FA1 /* GithubEndpoints.swift */,
-				EF3FB3A02575408B00FB67C0 /* GithubRouter.swift */,
 				EF5824652570934700196889 /* GithubWorker.swift */,
 				EF3FB39E2571ADA600FB67C0 /* GithubModels.swift */,
 			);
@@ -638,16 +644,18 @@
 				EFEE2C7E25707F4B00703FA1 /* GithubEndpoints.swift in Sources */,
 				EFEE2C4725707C1300703FA1 /* AppDelegate.swift in Sources */,
 				EFEE2C4925707C1300703FA1 /* SceneDelegate.swift in Sources */,
-				EF3FB3A12575408B00FB67C0 /* GithubRouter.swift in Sources */,
+				EFFF95E62580506000C52A3D /* PullRequestsCollectionViewCell.swift in Sources */,
 				EF58245B2570895000196889 /* ServerError.swift in Sources */,
-				EF3FB39D25717C3C00FB67C0 /* Header.swift in Sources */,
 				EFFB67CE25758CA00089321A /* String+Extension.swift in Sources */,
 				EF58247F2570A71500196889 /* RepositoriesCollectionViewCell.swift in Sources */,
+				EFFF95F32580592F00C52A3D /* TitleView.swift in Sources */,
 				EF5824662570934700196889 /* GithubWorker.swift in Sources */,
 				EF58246A2570A05800196889 /* GithubInfo.swift in Sources */,
+				EFFF95E125804FD400C52A3D /* PullRequestsVC.swift in Sources */,
 				EF5824872570AA4B00196889 /* RepositoriesInteractor.swift in Sources */,
 				EF58245F25708B1B00196889 /* Repository.swift in Sources */,
 				EF52630B257FB03000A8EE2D /* RepositoriesViewController.swift in Sources */,
+				EFFF95EE2580574D00C52A3D /* DescriptionView.swift in Sources */,
 				EF5824792570A42E00196889 /* Theme.swift in Sources */,
 				EF7D3F6625782C46004FBF40 /* OwnerView.swift in Sources */,
 				EF5262D0257851A600A8EE2D /* CountingItem.swift in Sources */,

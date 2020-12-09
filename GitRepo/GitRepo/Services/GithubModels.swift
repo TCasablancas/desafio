@@ -33,4 +33,24 @@ struct GithubModels {
             let pulls_url: String?
         }
     }
+    
+    struct PullRequestView {
+        struct Request { }
+        
+        struct Response {
+            var title: String?
+            var body: String?
+            var created_at: String?
+            var avatar: String?
+            var developer: String?
+        }
+        
+        struct ViewModel {
+            let title: String?
+            let body: String?
+            let created_at: String?
+            let avatar: String?
+            let developer: String?
+        }
+    }
 }

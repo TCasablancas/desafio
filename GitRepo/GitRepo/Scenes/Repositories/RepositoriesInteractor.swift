@@ -12,12 +12,6 @@ protocol RepositoriesInteractorBusinessLogic {
     func getData()
 }
 
-protocol RepositoriesInteractorDataStore {
-    var repository: [Repository] { get set }
-    var datarepository: Repository? { get set }
-    var owner: [Owner] { get set }
-}
-
 protocol RepositoriesInteractorOutput {
     func didStartLoading()
     func didGetData(_ repositories: [Repository])
@@ -27,9 +21,9 @@ protocol RepositoriesInteractorOutput {
 class ReposInteractor: RepositoriesInteractorBusinessLogic {
     
     let output: RepositoriesInteractorOutput
-    let worker: RepoWorker
+    let worker: GithubWorkerDelegate
 
-    init(output: RepositoriesInteractorOutput, worker: RepoWorker) {
+    init(output: RepositoriesInteractorOutput, worker: GithubWorkerDelegate) {
         self.output = output
         self.worker = worker
     }
@@ -38,9 +32,10 @@ class ReposInteractor: RepositoriesInteractorBusinessLogic {
     func getData() {
         output.didStartLoading()
         
-        self.worker.loadRepoList(page: 1) { [output] (response) in
+        self.worker.loadRepoList(page: 2) { [output] (response) in
             switch response {
             case .success(let model):
+                
                 output.didGetData(model.items)
                 
             case .serverError(let error):

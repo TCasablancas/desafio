@@ -118,7 +118,15 @@ class RepositoriesViewController: UICollectionViewController {
     override func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         let item = repositories[indexPath.item]
         self.routeToRepository(item)
-//        self.navigationController?.pushViewController(PullRequestsViewController(name: item.name ?? ""), animated: true)
+        
+        let presenter = PullRequestsPresenter()
+        let ainteracor = PullRequestsInteractor(output: presenter, worker: GithubWorker())
+        
+        guard
+            let name = item.name,
+            let url = item.pulls_url else { return }
+        
+        self.navigationController?.pushViewController(PullRequestsViewController(interactor: ainteracor), animated: true)
     }
 }
 
