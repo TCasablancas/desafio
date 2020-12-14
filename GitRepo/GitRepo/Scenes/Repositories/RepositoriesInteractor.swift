@@ -32,12 +32,12 @@ class ReposInteractor: RepositoriesInteractorBusinessLogic {
     func getData() {
         output.didStartLoading()
         
-        self.worker.loadRepoList(page: 2) { [output] (response) in
+        self.worker
+            .loadRepoList(page: 2) { [output] (response) in
             switch response {
             case .success(let model):
                 
                 output.didGetData(model.items)
-                
             case .serverError(let error):
                 let errorData = "\(error.statusCode), -, \(error.msgError)"
                 output.didGetError(errorData)

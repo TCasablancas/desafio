@@ -54,14 +54,13 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
     
     private func didSelectRepository(_ repository: GithubModels.RepositoryView.ViewModel) {
         guard
-            let developer = repository.developer,
-            let name = repository.name,
-            let url = repository.pulls_url
+            let fullname = repository.full_name,
+            let name = repository.name
         else { return }
 
         let presenter = PullRequestsPresenter()
         let interactor = PullRequestsInteractor(output: presenter, worker: GithubWorker())
-        let pullRequestsVC = PullRequestsViewController(interactor: interactor)
+        let pullRequestsVC = PullRequestsViewController(interactor: interactor, name: name, fullname: fullname)
 //        presenter.output = pullRequestsVC
     }
 

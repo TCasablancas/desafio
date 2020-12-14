@@ -13,9 +13,13 @@ import ObjectMapper
 protocol GithubWorkerDelegate {
     func loadRepoList(page: Int, completion: @escaping (_ response: ResponseGithubRepo<GithubData>) -> Void)
     func loadPullRequestList(completion: @escaping (_ response: ResponseGithubRepo<PullRequests>) -> Void)
+    func getResultValue() -> [[String:Any]]
 }
 
 class GithubWorker: Request, GithubWorkerDelegate {
+    
+    public var result: [[String:Any]]?
+    
     //Get Repo List
     func loadRepoList(page: Int = 0, completion: @escaping (_ response: ResponseGithubRepo<GithubData>) -> Void) {
         let offset = page * 10
@@ -47,20 +51,20 @@ class GithubWorker: Request, GithubWorkerDelegate {
     
     // Get Pull Request List
     func loadPullRequestList(completion: @escaping (_ response: ResponseGithubRepo<PullRequests>) -> Void) {
-//        let url = GithubEndpoints.getPullRequestsEndpoint
-        let url = "https://api.github.com/repos/vsouza/awesome-ios/pulls"
+        let url = GithubEndpoints.getPullRequestsEndpoint
         
-        Alamofire.request(url).responseJSON { (data: DataResponse<Any>) in
+        Alamofire.request(url).responseJSON { (data: DataResponse<Any>) -> Void in
             let statusCode = data.response?.statusCode
             switch data.result {
             case .success(let value):
-                guard let resultValue = value as? [String:Any] else { return }
-
-                if statusCode == 200 {
-                    guard let model = Mapper<PullRequests>().map(JSON: resultValue) else { return }
-                    completion(.success(model: model))
-                }
+                guard let resultValue = value as? [[String:Any]] else { return }
                 
+                self.result = resultValue
+                
+                if statusCode == 200 {
+                    let model = Mapper<PullRequests>().map(JSONObject: resultValue)
+                    completion(.success(model: model!))
+                }
             case .failure(let error):
                 let errorCode = error._code
                 if errorCode == -1009 {
@@ -72,5 +76,9 @@ class GithubWorker: Request, GithubWorkerDelegate {
                 }
             }
         }
+    }
+    
+    func getResultValue() -> [[String:Any]] {
+        return self.result ?? [[:]]
     }
 }

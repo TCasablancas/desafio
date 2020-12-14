@@ -45,7 +45,7 @@
 		EFEE2C7E25707F4B00703FA1 /* GithubEndpoints.swift in Sources */ = {isa = PBXBuildFile; fileRef = EFEE2C7D25707F4B00703FA1 /* GithubEndpoints.swift */; };
 		EFFB67CE25758CA00089321A /* String+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = EFFB67CD25758CA00089321A /* String+Extension.swift */; };
 		EFFB67DD25759CC60089321A /* Fonts.swift in Sources */ = {isa = PBXBuildFile; fileRef = EFFB67DC25759CC60089321A /* Fonts.swift */; };
-		EFFB67DF2575A9590089321A /* PullRequestsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EFFB67DE2575A9590089321A /* PullRequestsViewController.swift */; };
+		EFFB67DF2575A9590089321A /* PullRequestsV2ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EFFB67DE2575A9590089321A /* PullRequestsV2ViewController.swift */; };
 		EFFB67E1257671D60089321A /* PullRequestsInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = EFFB67E0257671D60089321A /* PullRequestsInteractor.swift */; };
 		EFFB67E3257672EA0089321A /* PullRequestsPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = EFFB67E2257672EA0089321A /* PullRequestsPresenter.swift */; };
 		EFFB67E525769B700089321A /* PullRequests.swift in Sources */ = {isa = PBXBuildFile; fileRef = EFFB67E425769B700089321A /* PullRequests.swift */; };
@@ -53,10 +53,11 @@
 		EFFB67EB2576D1B90089321A /* Roboto-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = EFFB67E82576D1B90089321A /* Roboto-Regular.ttf */; };
 		EFFB67EC2576D1B90089321A /* Roboto-Thin.ttf in Resources */ = {isa = PBXBuildFile; fileRef = EFFB67E92576D1B90089321A /* Roboto-Thin.ttf */; };
 		EFFB67ED2576D1B90089321A /* Roboto-Medium.ttf in Resources */ = {isa = PBXBuildFile; fileRef = EFFB67EA2576D1B90089321A /* Roboto-Medium.ttf */; };
-		EFFF95E125804FD400C52A3D /* PullRequestsVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = EFFF95E025804FD400C52A3D /* PullRequestsVC.swift */; };
+		EFFF95E125804FD400C52A3D /* PullRequestsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EFFF95E025804FD400C52A3D /* PullRequestsViewController.swift */; };
 		EFFF95E62580506000C52A3D /* PullRequestsCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = EFFF95E52580506000C52A3D /* PullRequestsCollectionViewCell.swift */; };
 		EFFF95EE2580574D00C52A3D /* DescriptionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EFFF95ED2580574D00C52A3D /* DescriptionView.swift */; };
 		EFFF95F32580592F00C52A3D /* TitleView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EFFF95F22580592F00C52A3D /* TitleView.swift */; };
+		EFFF960C2580675800C52A3D /* PullData.swift in Sources */ = {isa = PBXBuildFile; fileRef = EFFF960B2580675800C52A3D /* PullData.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -126,7 +127,7 @@
 		EFEE2C7D25707F4B00703FA1 /* GithubEndpoints.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GithubEndpoints.swift; sourceTree = "<group>"; };
 		EFFB67CD25758CA00089321A /* String+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "String+Extension.swift"; sourceTree = "<group>"; };
 		EFFB67DC25759CC60089321A /* Fonts.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Fonts.swift; sourceTree = "<group>"; };
-		EFFB67DE2575A9590089321A /* PullRequestsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PullRequestsViewController.swift; sourceTree = "<group>"; };
+		EFFB67DE2575A9590089321A /* PullRequestsV2ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PullRequestsV2ViewController.swift; sourceTree = "<group>"; };
 		EFFB67E0257671D60089321A /* PullRequestsInteractor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PullRequestsInteractor.swift; sourceTree = "<group>"; };
 		EFFB67E2257672EA0089321A /* PullRequestsPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PullRequestsPresenter.swift; sourceTree = "<group>"; };
 		EFFB67E425769B700089321A /* PullRequests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PullRequests.swift; sourceTree = "<group>"; };
@@ -134,10 +135,11 @@
 		EFFB67E82576D1B90089321A /* Roboto-Regular.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; name = "Roboto-Regular.ttf"; path = "GitRepo/Assets/Fonts/Roboto-Regular.ttf"; sourceTree = SOURCE_ROOT; };
 		EFFB67E92576D1B90089321A /* Roboto-Thin.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; name = "Roboto-Thin.ttf"; path = "GitRepo/Assets/Fonts/Roboto-Thin.ttf"; sourceTree = SOURCE_ROOT; };
 		EFFB67EA2576D1B90089321A /* Roboto-Medium.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; name = "Roboto-Medium.ttf"; path = "GitRepo/Assets/Fonts/Roboto-Medium.ttf"; sourceTree = SOURCE_ROOT; };
-		EFFF95E025804FD400C52A3D /* PullRequestsVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PullRequestsVC.swift; sourceTree = "<group>"; };
+		EFFF95E025804FD400C52A3D /* PullRequestsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PullRequestsViewController.swift; sourceTree = "<group>"; };
 		EFFF95E52580506000C52A3D /* PullRequestsCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PullRequestsCollectionViewCell.swift; sourceTree = "<group>"; };
 		EFFF95ED2580574D00C52A3D /* DescriptionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DescriptionView.swift; sourceTree = "<group>"; };
 		EFFF95F22580592F00C52A3D /* TitleView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TitleView.swift; sourceTree = "<group>"; };
+		EFFF960B2580675800C52A3D /* PullData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PullData.swift; sourceTree = "<group>"; };
 		FE371E2DA87CCB4094388122 /* Pods-GitRepo-GitRepoUITests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-GitRepo-GitRepoUITests.debug.xcconfig"; path = "Target Support Files/Pods-GitRepo-GitRepoUITests/Pods-GitRepo-GitRepoUITests.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -250,10 +252,10 @@
 		EF5824812570A79D00196889 /* PulRequests */ = {
 			isa = PBXGroup;
 			children = (
-				EFFB67DE2575A9590089321A /* PullRequestsViewController.swift */,
+				EFFB67DE2575A9590089321A /* PullRequestsV2ViewController.swift */,
 				EFFB67E0257671D60089321A /* PullRequestsInteractor.swift */,
 				EFFB67E2257672EA0089321A /* PullRequestsPresenter.swift */,
-				EFFF95E025804FD400C52A3D /* PullRequestsVC.swift */,
+				EFFF95E025804FD400C52A3D /* PullRequestsViewController.swift */,
 				EFFF95E52580506000C52A3D /* PullRequestsCollectionViewCell.swift */,
 			);
 			path = PulRequests;
@@ -353,6 +355,7 @@
 				EF58246025708BD800196889 /* Owner.swift */,
 				EFFB67E425769B700089321A /* PullRequests.swift */,
 				EFFB67E625769BB10089321A /* User.swift */,
+				EFFF960B2580675800C52A3D /* PullData.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -636,7 +639,7 @@
 				EFEE2C4B25707C1300703FA1 /* ViewController.swift in Sources */,
 				EF5824712570A29F00196889 /* ViewCode.swift in Sources */,
 				EFEE2C7C25707F0C00703FA1 /* Request.swift in Sources */,
-				EFFB67DF2575A9590089321A /* PullRequestsViewController.swift in Sources */,
+				EFFB67DF2575A9590089321A /* PullRequestsV2ViewController.swift in Sources */,
 				EF58246125708BD800196889 /* Owner.swift in Sources */,
 				EF5824772570A40D00196889 /* Color+Extension.swift in Sources */,
 				EFFB67E3257672EA0089321A /* PullRequestsPresenter.swift in Sources */,
@@ -651,7 +654,7 @@
 				EFFF95F32580592F00C52A3D /* TitleView.swift in Sources */,
 				EF5824662570934700196889 /* GithubWorker.swift in Sources */,
 				EF58246A2570A05800196889 /* GithubInfo.swift in Sources */,
-				EFFF95E125804FD400C52A3D /* PullRequestsVC.swift in Sources */,
+				EFFF95E125804FD400C52A3D /* PullRequestsViewController.swift in Sources */,
 				EF5824872570AA4B00196889 /* RepositoriesInteractor.swift in Sources */,
 				EF58245F25708B1B00196889 /* Repository.swift in Sources */,
 				EF52630B257FB03000A8EE2D /* RepositoriesViewController.swift in Sources */,
@@ -659,6 +662,7 @@
 				EF5824792570A42E00196889 /* Theme.swift in Sources */,
 				EF7D3F6625782C46004FBF40 /* OwnerView.swift in Sources */,
 				EF5262D0257851A600A8EE2D /* CountingItem.swift in Sources */,
+				EFFF960C2580675800C52A3D /* PullData.swift in Sources */,
 				EF58247B2570A46300196889 /* Constants.swift in Sources */,
 				EFFB67E725769BB10089321A /* User.swift in Sources */,
 			);

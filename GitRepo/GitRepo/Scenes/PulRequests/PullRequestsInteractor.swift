@@ -22,21 +22,18 @@ class PullRequestsInteractor: PullRequestsInteractorBusinessLogic {
     let output: PullRequestsInteractorOutput
     let worker: GithubWorkerDelegate
     
+    var title: String?
+    
     init(output: PullRequestsInteractorOutput, worker: GithubWorkerDelegate) {
         self.output = output
         self.worker = worker
     }
     
     func getPullRequests() {
-        worker.loadPullRequestList() { [output] (response) in
+        self.worker.loadPullRequestList() { [output] (response) in
             switch response {
             case .success(let model):
-                let creation = model.created_at
-                let title = model.title
-                let body = model.body
-                
-                print("DADOS DO REPO: ", creation, title, body)
-                
+                print(model.body)
             case .serverError(let error):
                 let errorData = "\(error.statusCode), -, \(error.msgError)"
                 output.didGetError(errorData)

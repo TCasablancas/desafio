@@ -20,7 +20,7 @@ struct GithubModels {
             var forks: Int?
             var avatar: String?
             var developer: String?
-            var pulls_url: String?
+            var full_name: String?
         }
         
         struct ViewModel {
@@ -30,7 +30,7 @@ struct GithubModels {
             let forks: Int?
             let avatar: String?
             let developer: String?
-            let pulls_url: String?
+            let full_name: String?
         }
     }
     

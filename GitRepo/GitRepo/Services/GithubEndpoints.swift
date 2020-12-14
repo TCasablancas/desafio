@@ -11,10 +11,17 @@ import Foundation
 class GithubEndpoints {
     static let basePath = "https://api.github.com/"
     static let search = "search/repositories?q=language:Swift"
+    static var repo_name = ""
     
     public static var getReposEndpoint: String {
         get {
             return (basePath + search)
+        }
+    }
+    
+    public static var getPullRequestsEndpoint: String {
+        get {
+            return (basePath + "repos/" + repo_name + "/pulls")
         }
     }
 }

@@ -1,79 +1,89 @@
 //
-//  PullRequestsVIewController.swift
+//  PullRequestsViewController.swift
 //  GitRepo
 //
-//  Created by Thyago on 30/11/20.
+//  Created by Thyago on 08/12/20.
 //  Copyright © 2020 tcasablancas. All rights reserved.
 //
 
 import UIKit
-import SnapKit
 
-protocol PullRequestsDisplayLogic: class {
+private let reuseIdentifier = "RepositoriesCollectionViewCell"
+
+class PullRequestsViewController: UICollectionViewController, PullRequestsCollectionViewCellDelegate {
+    func routeToRepository(_ repository: GithubModels.PullRequestView.ViewModel) {
+        routeToRepository(repository)
+    }
     
-}
-
-class PullRequestsViewController: UIViewController {
+    
     private let interactor: PullRequestsInteractorBusinessLogic
     public lazy var pullRequests: [GithubModels.PullRequestView.ViewModel] = []
     
-    private lazy var container: UIScrollView = {
-        let view = UIScrollView()
-        return view
-    }()
+    var name: String?
+    var fullname: String?
     
-    override func viewDidLoad() {
-        super.viewDidLoad()
-        setup()
-        
-        self.view.backgroundColor = Theme.default.gray
-        interactor.getPullRequests()
-    }
-    
-    override func viewWillAppear(_ animated: Bool) {
-        super.viewWillAppear(animated)
-        setupNavigationBar()
-    }
-    
-    override func viewDidAppear(_ animated: Bool) {
-        super.viewDidAppear(animated)
-    }
-    
-    init(interactor: PullRequestsInteractor) {
+    init(interactor: PullRequestsInteractor, name: String, fullname: String) {
         self.interactor = interactor
-        super.init(nibName: nil, bundle: nil)
+        self.name = name
+        self.fullname = fullname
+        
+        GithubEndpoints.repo_name = fullname
+        
+        let flow = UICollectionViewFlowLayout()
+        flow.sectionInset = UIEdgeInsets(top: 0, left: 0, bottom: 0, right: 0)
+        flow.scrollDirection = .vertical
+        flow.minimumLineSpacing = 0
+        flow.minimumInteritemSpacing = 0
+        
+        super.init(collectionViewLayout: flow)
     }
     
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
-}
-
-extension PullRequestsViewController {
+    
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        interactor.getPullRequests()
+        configureCollectionView()
+        setupNavigationBar()
+    }
+    
+    private func configureCollectionView() {
+        collectionView.register(PullRequestsCollectionViewCell.self, forCellWithReuseIdentifier: reuseIdentifier)
+        collectionView.delegate = self
+        collectionView.backgroundColor = Theme.default.gray
+    }
+    
     private func setupNavigationBar() {
         let navigation = self.navigationController?.navigationBar
         
-        title = "repotitle"
-        navigation?.topItem?.backButtonTitle = ""
+        title = self.fullname
+        navigation?.topItem?.backButtonTitle = "início"
         navigation?.tintColor = Theme.default.description
     }
-}
-
-extension PullRequestsViewController: PullRequestsDisplayLogic {
     
-}
+    // MARK: UICollectionViewDataSource
 
-extension PullRequestsViewController: ViewCode {
-    func viewHierarchy() {
-        self.view.addSubview(container)
+    override func numberOfSections(in collectionView: UICollectionView) -> Int {
+        return 10
     }
     
-    func setupConstraints() {
-        container.snp.makeConstraints { make in
-            make.width.equalToSuperview()
-            make.height.equalToSuperview()
-        }
+    override func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+        return pullRequests.count
+    }
+
+    override func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
+        let cell = self.collectionView.dequeueReusableCell(withReuseIdentifier: reuseIdentifier, for: indexPath) as! PullRequestsCollectionViewCell
+        
+        let item = pullRequests[indexPath.item]
+        cell.configureWith(with: item)
+        cell.delegate = self
+        
+        return cell
     }
     
-    
+    override func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        
+    }
 }

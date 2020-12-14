@@ -124,9 +124,10 @@ class RepositoriesViewController: UICollectionViewController {
         
         guard
             let name = item.name,
-            let url = item.pulls_url else { return }
+            let url = item.full_name else { return }
         
-        self.navigationController?.pushViewController(PullRequestsViewController(interactor: ainteracor), animated: true)
+        self.navigationController?.pushViewController(
+            PullRequestsViewController(interactor: ainteracor, name: name, fullname: url), animated: true)
     }
 }
 

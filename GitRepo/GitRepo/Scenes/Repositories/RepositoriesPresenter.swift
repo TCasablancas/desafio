@@ -31,7 +31,7 @@ class RepositoriesPresenter: RepositoriesInteractorOutput {
                 forks: $0.forks_count,
                 avatar: $0.avatar,
                 developer: $0.developer,
-                pulls_url: $0.pulls_url)
+                full_name: $0.full_name)
         })
         
         output?.displayRepositories(viewModel: viewModel)
